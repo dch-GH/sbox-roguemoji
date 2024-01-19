@@ -24,7 +24,7 @@ public partial class Stat : Entity
 
     public Stat()
     {
-        Transmit = TransmitType.Always;
+       
         CurrentValue = 0;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,7 +96,7 @@ public partial class Thing : Entity
         }
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void VfxNudge(Direction direction, float lifetime, float distance)
     {
         RemoveMoveVfx();
@@ -106,7 +107,7 @@ public partial class Thing : Entity
         nudge.Distance = distance;
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void VfxSlide(Direction direction, float lifetime, float distance)
     {
         RemoveMoveVfx();
@@ -117,7 +118,7 @@ public partial class Thing : Entity
         slide.Distance = distance;
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void VfxShake(float lifetime, float distance)
     {
         var shake = AddComponent<VfxShake>();
@@ -125,7 +126,7 @@ public partial class Thing : Entity
         shake.Distance = distance;
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void VfxScale(float lifetime, float startScale, float endScale)
     {
         var scale = AddComponent<VfxScale>();
@@ -134,7 +135,7 @@ public partial class Thing : Entity
         scale.EndScale = endScale;
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void VfxSpin(float lifetime, float startAngle, float endAngle)
     {
         var scale = AddComponent<VfxSpin>();
@@ -143,7 +144,7 @@ public partial class Thing : Entity
         scale.EndAngle = endAngle;
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void VfxFly(IntVector startingGridPos, float lifetime, float heightY = 0f, EasingType progressEasingType = EasingType.ExpoOut, EasingType heightEasingType = EasingType.QuadInOut)
     {
         RemoveMoveVfx();
@@ -156,7 +157,7 @@ public partial class Thing : Entity
         fly.HeightEasingType = heightEasingType;
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void VfxOpacityLerp(float lifetime, float startOpacity, float endOpacity, EasingType easingType = EasingType.Linear)
     {
         var opacityLerp = AddComponent<VfxOpacityLerp>();

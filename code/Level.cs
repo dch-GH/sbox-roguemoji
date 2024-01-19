@@ -42,7 +42,7 @@ public partial class Level : Entity
         Icon = LevelData.Icon;
         SurfaceType = LevelData.SurfaceType;
 
-        Transmit = TransmitType.Always;
+       
 
         SpawnStartingThings();
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
+﻿using System.Collections.Generic;
 using Sandbox;
 
 namespace Roguemoji;
@@ -77,7 +74,7 @@ public partial class GridManager : Entity
         AddFloaterClient(icon, gridPos, time, offsetStart, offsetEnd, height, text, requireSight, alwaysShowWhenAdjacent, offsetEasingType, fadeInTime, scale, opacity, shakeAmount);
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void AddFloaterClient(string icon, IntVector gridPos, float time, Vector2 offsetStart, Vector2 offsetEnd, float height = 0f, string text = "", bool requireSight = true, bool alwaysShowWhenAdjacent = false,
                         EasingType offsetEasingType = EasingType.Linear, float fadeInTime = 0f, float scale = 1f, float opacity = 1f, float shakeAmount = 0f)
     {
@@ -89,7 +86,7 @@ public partial class GridManager : Entity
         RemoveFloaterClient(icon, gridPos);
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void RemoveFloaterClient(string icon, IntVector gridPos)
     {
         for (int i = Floaters.Count - 1; i >= 0; i--)

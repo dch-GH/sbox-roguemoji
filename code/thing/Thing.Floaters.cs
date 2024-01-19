@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,7 +73,7 @@ public partial class Thing : Entity
         AddFloaterClient(icon, time, offsetStart, offsetEnd, height, text, requireSight, alwaysShowWhenAdjacent, offsetEasingType, fadeInTime, scale, opacity, shakeAmount, moveToGridOnDeath, showOnInvisible, showOnSeen);
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void AddFloaterClient(string icon, float time, Vector2 offsetStart, Vector2 offsetEnd, float height = 0f, string text = "", bool requireSight = true, bool alwaysShowWhenAdjacent = false, EasingType offsetEasingType = EasingType.Linear, 
         float fadeInTime = 0f, float scale = 1f, float opacity = 1f, float shakeAmount = 0f, bool moveToGridOnDeath = false, bool showOnInvisible = false, bool showOnSeen = false)
     {
@@ -87,7 +88,7 @@ public partial class Thing : Entity
         RemoveFloaterClient(icon);
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void RemoveFloaterClient(string icon)
     {
         if (!HasFloaters)
@@ -107,7 +108,7 @@ public partial class Thing : Entity
         //Log.Info($"{DisplayIcon} RemoveFloaterClient - Floaters.Count: {Floaters.Count}");
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void DestroyFloatersClient()
     {
         if (ContainingGridManager == null || Floaters == null)

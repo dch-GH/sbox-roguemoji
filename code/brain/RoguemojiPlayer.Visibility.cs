@@ -53,11 +53,12 @@ public partial class RoguemojiPlayer : ThingBrain
 
     public void RefreshVisibility()
     {
-        RefreshVisibilityClient(To.Single(this));
+		// TODO: RPC
+        //RefreshVisibilityClient(To.Single(this));
     }
 
-    [ClientRpc]
-    void RefreshVisibilityClient()
+	[TargetedRPC]
+	void RefreshVisibilityClient(To to)
     {
         if (!SeenCells.ContainsKey(ControlledThing.CurrentLevelId))
             SeenCells.Add(ControlledThing.CurrentLevelId, new HashSet<IntVector>());
@@ -87,7 +88,7 @@ public partial class RoguemojiPlayer : ThingBrain
             SaveSeenData(gridPos);
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void RevealEntireLevelClient()
     {
         if (ControlledThing == null)
@@ -223,7 +224,7 @@ public partial class RoguemojiPlayer : ThingBrain
         }
     }
 
-    [ClientRpc]
+    [TargetedRPC]
     public void CheckForUnnecessarySeenThings()
     {
         if (!SeenThings.ContainsKey(ControlledThing.CurrentLevelId))
@@ -236,7 +237,7 @@ public partial class RoguemojiPlayer : ThingBrain
             for (int i = things.Count - 1; i >= 0; i--)
             {
                 var data = things[i];
-                Thing thing = FindByIndex(data.networkIdent) as Thing;
+                Thing thing = Entity.FindByIndex(data.networkIdent) as Thing;
 
                 if (thing == null)
                     continue;

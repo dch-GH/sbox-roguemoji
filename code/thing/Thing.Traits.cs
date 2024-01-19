@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Roguemoji;
 
-public partial class Trait : Entity
+public partial class Trait : Entity 
 {
     [Net] public string TraitName { get; set; }
     [Net] public string Icon { get; set; }
@@ -30,7 +30,7 @@ public partial class Trait : Entity
 
     public Trait()
     {
-        Transmit = TransmitType.Always;
+       
     }
 
     public void SetTattoo(string icon, float scale, Vector2 offset)

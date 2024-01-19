@@ -9,7 +9,7 @@ public enum Direction { None, Left, Right, Down, Up, LeftDown, RightDown, LeftUp
 
 public enum GridType { None, Arena, Inventory, Equipment }
 
-public partial class GridManager : Entity
+public partial class GridManager : Entity 
 {
 	[Net] public int GridWidth { get; private set; }
 	[Net] public int GridHeight { get; private set; }
@@ -59,7 +59,7 @@ public partial class GridManager : Entity
             VisionChangedPlayers.Clear();
 
             foreach (var player in CheckSeenThingsPlayers)
-                player.CheckForUnnecessarySeenThings(To.Single(player));
+                //player.CheckForUnnecessarySeenThings(To.Single(player));
 
             CheckSeenThingsPlayers.Clear();
         }

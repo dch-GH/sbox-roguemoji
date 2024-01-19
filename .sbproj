@@ -1,19 +1,18 @@
 {
   "Title": "Roguemoji",
   "Type": "game",
-  "Org": "ryleigh",
+  "Org": "null",
   "Ident": "roguemoji",
   "Tags": "",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
-  "ResourcePaths": [
-    "/fonts/*",
-    "/sounds/*",
-    "/levels/*"
-  ],
+  "Resources": null,
+  "MenuResources": "*",
   "HasCode": true,
   "CodePath": "/code/",
+  "PackageReferences": [],
+  "EditorReferences": null,
   "Metadata": {
     "MaxPlayers": 8,
     "MinPlayers": 1,

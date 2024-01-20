@@ -11,7 +11,7 @@ public partial class Hole : Thing
         Description = "A deep hole leading to another area";
         Tooltip = "A hole";
         IconDepth = (int)IconDepthLevel.Hole;
-        Flags = ThingFlags.Exclusive | ThingFlags.Selectable | ThingFlags.CantBePushed;
+        ThingFlags = ThingFlags.Exclusive | ThingFlags.Selectable | ThingFlags.CantBePushed;
         PathfindMovementCost = 15f;
         Flammability = 0;
 

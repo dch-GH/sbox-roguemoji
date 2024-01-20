@@ -11,7 +11,7 @@ public partial class Leaf : Thing
         Description = "Small pile of dry leaves";
         Tooltip = "A pile of leaves";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
         Flammability = 55;
     }
 

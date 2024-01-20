@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using Sandbox;
+﻿using Sandbox;
 
 namespace Roguemoji;
 
@@ -32,8 +25,11 @@ public partial class Level : Entity
         {
             Log.Error($"Level {levelId} not loaded!");
         }
+	
+		// TODO: ENTITY SYSTEM
+		var gridManagerGO = RoguemojiGame.SpawnGameObject();
+		GridManager = gridManagerGO.Components.Create<GridManager>();
 
-        GridManager = new();
         GridManager.Init(LevelData.Width, LevelData.Height);
         GridManager.GridType = GridType.Arena;
         GridManager.LevelId = LevelId;
@@ -41,8 +37,6 @@ public partial class Level : Entity
         LevelName = LevelData.Name;
         Icon = LevelData.Icon;
         SurfaceType = LevelData.SurfaceType;
-
-       
 
         SpawnStartingThings();
     }

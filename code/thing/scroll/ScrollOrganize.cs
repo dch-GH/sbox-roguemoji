@@ -9,7 +9,7 @@ public partial class ScrollOrganize : Scroll
     public ScrollOrganize()
 	{
         ScrollType = ScrollType.Organize;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Organizes the items below your hotbar";

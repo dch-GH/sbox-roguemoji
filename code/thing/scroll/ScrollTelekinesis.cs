@@ -9,7 +9,7 @@ public partial class ScrollTelekinesis : Scroll
     public ScrollTelekinesis()
     {
         ScrollType = ScrollType.Telekinesis;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Pull target with your mind";

@@ -1,0 +1,66 @@
+{
+  "Id": "78d8770c-0e7e-44cb-942a-cd050dde5c93",
+  "GameObjects": [
+    {
+      "Id": "206aa9d5-5456-4c9e-9bce-1bca4b5758ea",
+      "Name": "Level",
+      "Position": "149.995,149.995,-212.125",
+      "Enabled": true
+    },
+    {
+      "Id": "c114dcdd-3f42-4152-87cd-de910df1f856",
+      "Name": "Game",
+      "Position": "149.995,149.995,-212.125",
+      "Enabled": true,
+      "Components": [
+        {
+          "__version": 0,
+          "__type": "RoguemojiGame",
+          "__enabled": true,
+          "_hudPrefab": "prefabs/hud.prefab",
+          "PlayerPrefab": "prefabs/player.prefab",
+          "SpawnPoints": [],
+          "StartServer": true
+        }
+      ]
+    },
+    {
+      "Id": "dd9c902a-9437-4e57-881e-850223bd1022",
+      "Name": "Camera",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__version": 0,
+          "__type": "CameraComponent",
+          "__enabled": true,
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "Lerping": true,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true
+  },
+  "Title": "rm_main",
+  "Description": "",
+  "__references": []
+}

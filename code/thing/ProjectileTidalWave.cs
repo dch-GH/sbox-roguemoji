@@ -14,7 +14,7 @@ public partial class ProjectileTidalWave : Thing
         Description = "";
         Tooltip = "";
         IconDepth = (int)IconDepthLevel.Projectile;
-        Flags = ThingFlags.DoesntBumpThings;
+        ThingFlags = ThingFlags.DoesntBumpThings;
         Flammability = 0;
     }
 

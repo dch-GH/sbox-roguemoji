@@ -9,7 +9,7 @@ public partial class ScrollDuplicate : Scroll
     public ScrollDuplicate()
     {
         ScrollType = ScrollType.Duplicate;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Create a copy of something";

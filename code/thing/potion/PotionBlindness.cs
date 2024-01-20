@@ -11,7 +11,7 @@ public partial class PotionBlindness : Potion
     public PotionBlindness()
     {
         PotionType = PotionType.Blindness;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Blinds the drinker";

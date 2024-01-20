@@ -3,7 +3,7 @@ using System;
 
 namespace Roguemoji;
 
-public abstract class ThingComponent
+public abstract class ThingComponent : Sandbox.Component
 {
     public Thing Thing { get; private set; }
 
@@ -12,11 +12,15 @@ public abstract class ThingComponent
     public float TimeElapsed { get; protected set; }
     public bool IsClientComponent { get; protected set; }
 
-    public virtual void Init(Thing thing)
+	protected override void OnAwake()
+	{
+		var thing = GameObject.Components.Get<Thing>();
+		ShouldUpdate = false;
+		TimeElapsed = 0f;
+	}
+
+	public virtual void Init(Thing thing)
     {
-        Thing = thing;
-        ShouldUpdate = false;
-        TimeElapsed = 0f;
     }
 
     public virtual void Update(float dt)

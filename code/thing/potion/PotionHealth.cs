@@ -12,7 +12,7 @@ public partial class PotionHealth : Potion
     public PotionHealth()
     {
         PotionType = PotionType.Health;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Recover some health";

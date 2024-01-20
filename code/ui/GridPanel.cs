@@ -38,7 +38,7 @@ public abstract class GridPanel : Panel
         return new IntVector(MathX.FloorToInt(screenPos.x / cellSize), MathX.FloorToInt(screenPos.y / cellSize));
     }
 
-    protected virtual IList<Thing> GetThings()
+    protected virtual List<Thing> GetThings()
     {
         return null;
     }

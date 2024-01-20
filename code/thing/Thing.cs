@@ -74,10 +74,10 @@ public partial class Thing : Entity
 
 	[Net] public uint ThingId { get; private set; }
 
-	[Net] public ThingFlags Flags { get; set; }
-	public bool HasFlag( ThingFlags flag ) => Flags.HasFlag( flag );
-	public void AddFlag( ThingFlags flag ) { if ( !HasFlag( flag ) ) Flags |= flag; }
-	public void RemoveFlag( ThingFlags flag ) { if ( HasFlag( flag ) ) Flags &= ~flag; }
+	[Net] public ThingFlags ThingFlags { get; set; }
+	public bool HasFlag( ThingFlags flag ) => ThingFlags.HasFlag( flag );
+	public void AddFlag( ThingFlags flag ) { if ( !HasFlag( flag ) ) ThingFlags |= flag; }
+	public void RemoveFlag( ThingFlags flag ) { if ( HasFlag( flag ) ) ThingFlags &= ~flag; }
 
 	[Net] public Thing WieldedThing { get; protected set; }
 	[Net] public Thing ThingWieldingThis { get; protected set; }
@@ -86,7 +86,7 @@ public partial class Thing : Entity
 	public Vector2 InfoWieldedThingOffset { get; set; } // Client-only
 	public int InfoWieldedThingFontSize { get; set; } // Client-only
 
-	[Net] public IList<Thing> EquippedThings { get; private set; }
+	[Net] public List<Thing> EquippedThings { get; private set; } = new();
 	[Net] public Thing ThingOwningThis { get; set; } // in inventory, equipment, and/or wielding
 	public void SetOwningThing( Thing owningThing ) { ThingOwningThis = owningThing; }
 
@@ -205,7 +205,6 @@ public partial class Thing : Entity
 	}
 
 	// todo: dont call this for everything
-	[Event.Tick.Client]
 	public virtual void ClientTick()
 	{
 		float dt = Time.Delta;
@@ -456,7 +455,7 @@ public partial class Thing : Entity
 			((CActing)acting).PerformedAction();
 	}
 
-	public virtual void Destroy()
+	protected override void OnDestroy()
 	{
 		if ( IsDestroyed )
 			return;
@@ -617,7 +616,7 @@ public partial class Thing : Entity
 
 	public override int GetHashCode()
 	{
-		var transformHash = HashCode.Combine( RotationDegrees, IconScale, IconDepth, Flags, Opacity );
+		var transformHash = HashCode.Combine( RotationDegrees, IconScale, IconDepth, ThingFlags, Opacity );
 		return HashCode.Combine( DisplayIcon, WieldedThing?.ThingId ?? 0, PlayerNum + ThingId, transformHash );
 		//return HashCode.Combine((DisplayIcon + ThingId.ToString()), PlayerNum, Offset, RotationDegrees, IconScale, IconDepth, Flags);
 	}
@@ -625,12 +624,12 @@ public partial class Thing : Entity
 	public int GetInfoDisplayHash()
 	{
 		// todo: check all stats
-		return HashCode.Combine( NetworkIdent, DisplayIcon, WieldedThing?.DisplayIcon ?? "", Flags, HasStats );
+		return HashCode.Combine( NetworkIdent, DisplayIcon, WieldedThing?.DisplayIcon ?? "", ThingFlags, HasStats );
 	}
 
 	public int GetNearbyCellHash()
 	{
-		return HashCode.Combine( DisplayIcon, PlayerNum, IconDepth, Flags, NetworkIdent, ThingId );
+		return HashCode.Combine( DisplayIcon, PlayerNum, IconDepth, ThingFlags, NetworkIdent, ThingId );
 	}
 
 	public int GetZPos()

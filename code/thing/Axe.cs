@@ -15,7 +15,7 @@ public partial class Axe : Thing
         Description = "A powerful weapon, especially against trees";
         Tooltip = "An axe";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
         Flammability = 13;
 
         if (Game.IsServer)

@@ -17,10 +17,14 @@ public partial class ThingBrain : Entity
 
 	public virtual void Update( float dt )
 	{
+		//if ( !IsProxy )
+		//{
+		//	ClientTick();
+		//}
 
+		ClientTick();
 	}
 
-	[Event.Tick.Client]
 	public virtual void ClientTick()
 	{
 

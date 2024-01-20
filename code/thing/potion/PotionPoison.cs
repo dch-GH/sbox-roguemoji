@@ -11,7 +11,7 @@ public partial class PotionPoison : Potion
     public PotionPoison()
     {
         PotionType = PotionType.Poison;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Poisons the drinker";

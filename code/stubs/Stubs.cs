@@ -3,49 +3,37 @@ using System;
 
 namespace Roguemoji;
 
-public class Client : Sandbox.Component, IClient
+public class Client : Component, IClient
 {
 	public Connection Connection;
 
 	public string Name { get; set; }
-	public Entity Pawn { get; set; }
+	public GameObject Pawn { get; set; }
+	public RoguemojiPlayer PlayerComponent { get; set; }
 	public Guid ConnectionId => Connection.Id;
 }
 
 public interface IClient
 {
 	public string Name { get; set; }
-	public Entity Pawn { get; set; }
+	public GameObject Pawn { get; set; }
+	public RoguemojiPlayer PlayerComponent { get; set; }
 	public Guid ConnectionId => Guid.Empty;
-}
-
-public static class Event
-{
-	public class Tick
-	{
-		public class ClientAttribute : System.Attribute { }
-		public class ServerAttribute : System.Attribute { }
-	}
-}
-
-public enum TransmitType
-{
-	Never,
-	Always
 }
 
 public struct To
 {
-	private IClient _to;
 	public Guid ConnectionId { get; private set; }
 	public bool SendToAll = false;
 	public static To Single( IClient client )
 	{
-		return new To { _to = client };
+		return new To { ConnectionId = client.ConnectionId };
 	}
 	public static To Single( Entity ent )
 	{
-		return new To { _to = ent.Client };
+		//Log.Info( $"Entity: {ent}" );
+		//Log.Info( $"Client: {ent.Client}" );
+		return new To { ConnectionId = ent.Client.ConnectionId };
 	}
 	public static To All => new To { SendToAll = true };
 
@@ -74,8 +62,8 @@ public static class DebugOverlay
 
 public static class ConnectionExtensions
 {
-	public static Entity Pawn( this Connection self )
+	public static RoguemojiPlayer Pawn( this Connection self )
 	{
-		return GameManager.Clients[self.Id].Pawn;
+		return RoguemojiGame.Clients[self.Id].PlayerComponent;
 	}
 }

@@ -12,7 +12,7 @@ public partial class PotionEnergy : Potion
     public PotionEnergy()
     {
         PotionType = PotionType.Energy;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Recover some energy";

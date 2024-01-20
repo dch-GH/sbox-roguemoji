@@ -11,7 +11,7 @@ public partial class PotionLava : Potion
     public PotionLava()
     {
         PotionType = PotionType.Lava;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Burning hot lava";

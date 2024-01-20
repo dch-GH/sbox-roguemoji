@@ -14,7 +14,7 @@ public partial class Cherry : Thing
         Description = "Sweet and juicy";
         Tooltip = "A couple cherries";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
         Flammability = 13;
 
         if (Game.IsServer)

@@ -31,8 +31,8 @@ public partial class RoguemojiPlayer : ThingBrain
 	[Net] public GridType AimingGridType { get; set; }
 	public HashSet<IntVector> AimingCells { get; set; } // Client-only
 
-	[Net] public IList<ScrollType> IdentifiedScrollTypes { get; private set; }
-	[Net] public IList<PotionType> IdentifiedPotionTypes { get; private set; }
+	[Net] public List<ScrollType> IdentifiedScrollTypes { get; private set; } = new();
+	[Net] public List<PotionType> IdentifiedPotionTypes { get; private set; } = new();
 
 	[Net] public int ConfusionSeed { get; set; }
 	public bool IsConfused => ConfusionSeed > 0;
@@ -40,31 +40,33 @@ public partial class RoguemojiPlayer : ThingBrain
 	[Net] public int HallucinatingSeed { get; set; }
 	public bool IsHallucinating => HallucinatingSeed > 0;
 
-	public RoguemojiPlayer()
+	protected override void OnAwake()
 	{
-		if ( Game.IsServer )
-		{
-			InventoryGridManager = new();
-			InventoryGridManager.Init( RoguemojiGame.InventoryWidth, RoguemojiGame.InventoryHeight );
-			InventoryGridManager.GridType = GridType.Inventory;
-			InventoryGridManager.OwningPlayer = this;
+		Log.Error( "ajhawdhuwaldjhwadhawkljhdawhld" );
 
-			EquipmentGridManager = new();
-			EquipmentGridManager.Init( RoguemojiGame.EquipmentWidth, RoguemojiGame.EquipmentHeight );
-			EquipmentGridManager.GridType = GridType.Equipment;
-			EquipmentGridManager.OwningPlayer = this;
+		var gridManagerGO = RoguemojiGame.SpawnGameObject();
+		InventoryGridManager = gridManagerGO.Components.Create<GridManager>();
 
-			IdentifiedScrollTypes = new List<ScrollType>();
-			IdentifiedPotionTypes = new List<PotionType>();
-			//SetStartingValues();
-		}
-		else
-		{
-			VisibleCells = new HashSet<IntVector>();
-			SeenCells = new Dictionary<LevelId, HashSet<IntVector>>();
-			SeenThings = new Dictionary<LevelId, Dictionary<IntVector, List<SeenThingData>>>();
-			AimingCells = new HashSet<IntVector>();
-		}
+		InventoryGridManager.Init( RoguemojiGame.InventoryWidth, RoguemojiGame.InventoryHeight );
+		InventoryGridManager.GridType = GridType.Inventory;
+		InventoryGridManager.OwningPlayer = this;
+
+		// TODO: ENTITY SYSTEM
+		var eqgmGo = RoguemojiGame.SpawnGameObject();
+		EquipmentGridManager = eqgmGo.Components.Create<GridManager>();
+
+		EquipmentGridManager.Init( RoguemojiGame.EquipmentWidth, RoguemojiGame.EquipmentHeight );
+		EquipmentGridManager.GridType = GridType.Equipment;
+		EquipmentGridManager.OwningPlayer = this;
+
+		IdentifiedScrollTypes = new List<ScrollType>();
+		IdentifiedPotionTypes = new List<PotionType>();
+
+		//SetStartingValues();
+		VisibleCells = new HashSet<IntVector>();
+		SeenCells = new Dictionary<LevelId, HashSet<IntVector>>();
+		SeenThings = new Dictionary<LevelId, Dictionary<IntVector, List<SeenThingData>>>();
+		AimingCells = new HashSet<IntVector>();
 	}
 
 	void SetStartingValues()
@@ -323,7 +325,6 @@ public partial class RoguemojiPlayer : ThingBrain
 		}
 	}
 
-	[Event.Tick.Client]
 	public override void ClientTick()
 	{
 		base.ClientTick();
@@ -702,6 +703,9 @@ public partial class RoguemojiPlayer : ThingBrain
 		CActing acting = null;
 		if ( ControlledThing.GetComponent<CActing>( out var component ) )
 			acting = (CActing)component;
+
+		if ( acting is null )
+			Log.Error( "ACTING IS NULL" );
 
 		if ( !acting.IsActionReady && !dontRequireAction )
 		{
@@ -1177,11 +1181,11 @@ public partial class RoguemojiPlayer : ThingBrain
 	}
 
 	[TargetedRPC]
-	public void AimTargetCellsClient( To to, int networkIdent )
+	public void AimTargetCellsClient( To to, Guid networkIdent )
 	{
 		AimingCells.Clear();
 
-		Thing usedThing = Entity.FindByIndex( networkIdent ) as Thing;
+		Thing usedThing = FindByIndex( networkIdent ) as Thing;
 		var aimingCells = usedThing.GetAimingTargetCellsClient();
 
 		foreach ( IntVector gridPos in aimingCells )

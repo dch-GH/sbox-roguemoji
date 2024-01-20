@@ -1,176 +1,163 @@
 ﻿using Sandbox;
-
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Roguemoji;
 
 public partial class Thing : Entity
 {
-    public Dictionary<TypeDescription, ThingComponent> ThingComponents = new Dictionary<TypeDescription, ThingComponent>();
+	public List<ThingComponent> ThingComponents => GameObject.Components.GetAll<ThingComponent>().ToList();
+	public ThingComponent AddComponent( TypeDescription type )
+	{
+		if ( type == null )
+		{
+			Log.Info( "type is null!" );
+			return null;
+		}
 
-    public ThingComponent AddComponent(TypeDescription type)
-    {
-        if (type == null)
-        {
-            Log.Info("type is null!");
-            return null;
-        }
+		var component = (ThingComponent)Components.Get( type.TargetType );
+		if ( component is not null )
+		{
+			component.ReInitialize();
+		}
+		else
+		{
+			component = Components.Create<ThingComponent>( type );
+			component.Init( this );
+		}
 
-        ThingComponent component = null;
+		OnAddComponent( type );
+		return component;
+	}
 
-        if (ThingComponents.ContainsKey(type))
-        {
-            component = ThingComponents[type];
-            component.ReInitialize();
-        }
-        else
-        {
-            component = type.Create<ThingComponent>();
-            component.Init(this);
-            ThingComponents.Add(type, component);
-        }
+	public T AddComponent<T>() where T : ThingComponent
+	{
+		return AddComponent( TypeLibrary.GetType( typeof( T ) ) ) as T;
+	}
 
-        OnAddComponent(type);
-        return component;
-    }
+	public bool RemoveComponent( TypeDescription type )
+	{
+		var component = (ThingComponent)Components.Get( type.TargetType );
+		if ( component is null )
+		{
+			component.OnRemove();
+			OnRemoveComponent( type );
+			component.Destroy();
+			return true;
+		}
 
-    public T AddComponent<T>() where T : ThingComponent
-    {
-        return AddComponent(TypeLibrary.GetType(typeof(T))) as T;
-    }
+		return false;
+	}
 
-    public bool RemoveComponent(TypeDescription type)
-    {
-        if (ThingComponents.ContainsKey(type))
-        {
-            var component = ThingComponents[type];
-            component.OnRemove();
-            ThingComponents.Remove(type);
-            OnRemoveComponent(type);
-            return true;
-        }
+	public bool RemoveComponent<T>() where T : ThingComponent
+	{
+		return RemoveComponent( TypeLibrary.GetType( typeof( T ) ) );
+	}
 
-        return false;
-    }
+	public bool GetComponent( TypeDescription type, out ThingComponent component )
+	{
+		component = (ThingComponent)Components.Get( type.TargetType );
 
-    public bool RemoveComponent<T>() where T : ThingComponent
-    {
-        return RemoveComponent(TypeLibrary.GetType(typeof(T)));
-    }
+		if ( component is not null )
+		{
+			return true;
+		}
 
-    public bool GetComponent(TypeDescription type, out ThingComponent component)
-    {
-        if (ThingComponents.ContainsKey(type))
-        {
-            component = ThingComponents[type];
-            return true;
-        }
+		component = null;
+		return false;
+	}
 
-        component = null;
-        return false;
-    }
+	public bool GetComponent<T>( out ThingComponent component ) where T : ThingComponent
+	{
+		return GetComponent( TypeLibrary.GetType( typeof( T ) ), out component );
+	}
 
-    public bool GetComponent<T>(out ThingComponent component) where T : ThingComponent
-    {
-        return GetComponent(TypeLibrary.GetType(typeof(T)), out component);
-    }
+	public bool HasComponent( TypeDescription type )
+	{
+		var component = (ThingComponent)Components.Get( type.TargetType );
+		return component is not null;
+	}
 
-    public bool HasComponent(TypeDescription type)
-    {
-        return ThingComponents.ContainsKey(type);
-    }
+	/// <summary> Server-only. </summary>
+	public bool HasComponent<T>() where T : ThingComponent
+	{
+		return HasComponent( TypeLibrary.GetType( typeof( T ) ) );
+	}
 
-    /// <summary> Server-only. </summary>
-    public bool HasComponent<T>() where T : ThingComponent
-    {
-        return HasComponent(TypeLibrary.GetType(typeof(T)));
-    }
+	[TargetedRPC]
+	public void VfxNudge( Direction direction, float lifetime, float distance )
+	{
+		RemoveMoveVfx();
 
-    public void ForEachComponent(Action<ThingComponent> action)
-    {
-        foreach (var (_, component) in ThingComponents)
-        {
-            action(component);
-        }
-    }
+		var nudge = AddComponent<VfxNudge>();
+		nudge.Direction = direction;
+		nudge.Lifetime = lifetime;
+		nudge.Distance = distance;
+	}
 
-    [TargetedRPC]
-    public void VfxNudge(Direction direction, float lifetime, float distance)
-    {
-        RemoveMoveVfx();
+	[TargetedRPC]
+	public void VfxSlide( Direction direction, float lifetime, float distance )
+	{
+		RemoveMoveVfx();
 
-        var nudge = AddComponent<VfxNudge>();
-        nudge.Direction = direction;
-        nudge.Lifetime = lifetime;
-        nudge.Distance = distance;
-    }
+		var slide = AddComponent<VfxSlide>();
+		slide.Direction = direction;
+		slide.Lifetime = lifetime;
+		slide.Distance = distance;
+	}
 
-    [TargetedRPC]
-    public void VfxSlide(Direction direction, float lifetime, float distance)
-    {
-        RemoveMoveVfx();
+	[TargetedRPC]
+	public void VfxShake( float lifetime, float distance )
+	{
+		var shake = AddComponent<VfxShake>();
+		shake.Lifetime = lifetime;
+		shake.Distance = distance;
+	}
 
-        var slide = AddComponent<VfxSlide>();
-        slide.Direction = direction;
-        slide.Lifetime = lifetime;
-        slide.Distance = distance;
-    }
+	[TargetedRPC]
+	public void VfxScale( float lifetime, float startScale, float endScale )
+	{
+		var scale = AddComponent<VfxScale>();
+		scale.Lifetime = lifetime;
+		scale.StartScale = startScale;
+		scale.EndScale = endScale;
+	}
 
-    [TargetedRPC]
-    public void VfxShake(float lifetime, float distance)
-    {
-        var shake = AddComponent<VfxShake>();
-        shake.Lifetime = lifetime;
-        shake.Distance = distance;
-    }
+	[TargetedRPC]
+	public void VfxSpin( float lifetime, float startAngle, float endAngle )
+	{
+		var scale = AddComponent<VfxSpin>();
+		scale.Lifetime = lifetime;
+		scale.StartAngle = startAngle;
+		scale.EndAngle = endAngle;
+	}
 
-    [TargetedRPC]
-    public void VfxScale(float lifetime, float startScale, float endScale)
-    {
-        var scale = AddComponent<VfxScale>();
-        scale.Lifetime = lifetime;
-        scale.StartScale = startScale;
-        scale.EndScale = endScale;
-    }
+	[TargetedRPC]
+	public void VfxFly( IntVector startingGridPos, float lifetime, float heightY = 0f, EasingType progressEasingType = EasingType.ExpoOut, EasingType heightEasingType = EasingType.QuadInOut )
+	{
+		RemoveMoveVfx();
 
-    [TargetedRPC]
-    public void VfxSpin(float lifetime, float startAngle, float endAngle)
-    {
-        var scale = AddComponent<VfxSpin>();
-        scale.Lifetime = lifetime;
-        scale.StartAngle = startAngle;
-        scale.EndAngle = endAngle;
-    }
+		var fly = AddComponent<VfxFly>();
+		fly.StartingGridPos = startingGridPos;
+		fly.Lifetime = lifetime;
+		fly.HeightY = heightY;
+		fly.ProgressEasingType = progressEasingType;
+		fly.HeightEasingType = heightEasingType;
+	}
 
-    [TargetedRPC]
-    public void VfxFly(IntVector startingGridPos, float lifetime, float heightY = 0f, EasingType progressEasingType = EasingType.ExpoOut, EasingType heightEasingType = EasingType.QuadInOut)
-    {
-        RemoveMoveVfx();
+	[TargetedRPC]
+	public void VfxOpacityLerp( float lifetime, float startOpacity, float endOpacity, EasingType easingType = EasingType.Linear )
+	{
+		var opacityLerp = AddComponent<VfxOpacityLerp>();
+		opacityLerp.Lifetime = lifetime;
+		opacityLerp.StartOpacity = startOpacity;
+		opacityLerp.EndOpacity = endOpacity;
+		opacityLerp.EasingType = easingType;
+	}
 
-        var fly = AddComponent<VfxFly>();
-        fly.StartingGridPos = startingGridPos;
-        fly.Lifetime = lifetime;
-        fly.HeightY = heightY;
-        fly.ProgressEasingType = progressEasingType;
-        fly.HeightEasingType = heightEasingType;
-    }
-
-    [TargetedRPC]
-    public void VfxOpacityLerp(float lifetime, float startOpacity, float endOpacity, EasingType easingType = EasingType.Linear)
-    {
-        var opacityLerp = AddComponent<VfxOpacityLerp>();
-        opacityLerp.Lifetime = lifetime;
-        opacityLerp.StartOpacity = startOpacity;
-        opacityLerp.EndOpacity = endOpacity;
-        opacityLerp.EasingType = easingType;
-    }
-
-    void RemoveMoveVfx()
-    {
-        RemoveComponent<VfxSlide>();
-        RemoveComponent<VfxNudge>();
-        RemoveComponent<VfxFly>();
-    }
+	void RemoveMoveVfx()
+	{
+		RemoveComponent<VfxSlide>();
+		RemoveComponent<VfxNudge>();
+		RemoveComponent<VfxFly>();
+	}
 }

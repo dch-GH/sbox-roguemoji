@@ -90,7 +90,7 @@
     public override int GridWidth => RoguemojiGame.EquipmentWidth;
     public override int GridHeight => RoguemojiGame.EquipmentHeight;
 
-    protected override IList<Thing> GetThings()
+    protected override List<Thing> GetThings()
     {
         return RoguemojiGame.Instance.LocalPlayer.EquipmentGridManager.Things;
     }

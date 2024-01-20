@@ -18,7 +18,7 @@ public partial class Juicebox : Thing
         Description = "Heals each time you sip";
         Tooltip = "A juicebox";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
         Flammability = 16;
 
         if (Game.IsServer)

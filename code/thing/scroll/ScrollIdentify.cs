@@ -12,7 +12,7 @@ public partial class ScrollIdentify : Scroll
     public ScrollIdentify()
 	{
         ScrollType = ScrollType.Identify;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Reveals unidentified scrolls or potions";

@@ -14,7 +14,7 @@ public partial class WhiteCane : Thing
         Description = "Useful when you can't see anything";
         Tooltip = "A white cane";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
         Flammability = 9;
 
         if (Game.IsServer)

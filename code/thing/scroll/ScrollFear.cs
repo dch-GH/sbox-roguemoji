@@ -9,7 +9,7 @@ public partial class ScrollFear : Scroll
     public ScrollFear()
     {
         ScrollType = ScrollType.Fear;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Scare all enemies near you";

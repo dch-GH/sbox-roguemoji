@@ -11,7 +11,7 @@ public partial class PotionWater : Potion
     public PotionWater()
     {
         PotionType = PotionType.Water;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Fresh clean water";

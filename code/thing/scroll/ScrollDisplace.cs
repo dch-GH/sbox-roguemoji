@@ -10,7 +10,7 @@ public partial class ScrollDisplace : Scroll
     public ScrollDisplace()
 	{
         ScrollType = ScrollType.Displace;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Forces things to teleport";

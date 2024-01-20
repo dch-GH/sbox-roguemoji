@@ -13,7 +13,7 @@ public partial class Coat : Thing
         Description = "Thick and warm";
         Tooltip = "A thick coat";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
         Flammability = 22;
 
         if (Game.IsServer)

@@ -10,7 +10,7 @@ public partial class ScrollSentience : Scroll
     public ScrollSentience()
 	{
         ScrollType = ScrollType.Sentience;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Animate a non-thinking object";

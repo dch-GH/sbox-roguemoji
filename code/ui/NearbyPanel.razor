@@ -41,15 +41,15 @@
     {
         return;
     }
-
+	
     @foreach (var thing in GetThings(player))
     {
-        <NearbyCell Thing=@thing>
+        @* <NearbyCell Thing=@thing>
             @if(thing.HasFloaters)
             {
                 <FloaterDisplayNearby Thing=@thing></FloaterDisplayNearby>
             }
-        </NearbyCell>
+        </NearbyCell> *@
     }
 </root>
 

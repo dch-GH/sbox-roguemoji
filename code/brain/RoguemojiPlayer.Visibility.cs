@@ -19,7 +19,7 @@ public class SeenThingData
     public float opacity;
     public float wieldedOpacity;
     public bool isVisible;
-    public int networkIdent;
+    public Guid networkIdent;
     public List<SeenFloaterData> floaterList;
 }
 
@@ -45,11 +45,11 @@ public enum PlayerVisionChangeReason { ChangedGridPos, IncreasedSightBlockAmount
 
 public partial class RoguemojiPlayer : ThingBrain
 {
-    public HashSet<IntVector> VisibleCells { get; set; } // Client-only
-    public Dictionary<LevelId, HashSet<IntVector>> SeenCells { get; set; } // Client-only
-    public Dictionary<LevelId, Dictionary<IntVector, List<SeenThingData>>> SeenThings { get; set; } // Client-only
+    public HashSet<IntVector> VisibleCells { get; set; } = new();  // Client-only
+	public Dictionary<LevelId, HashSet<IntVector>> SeenCells { get; set; } = new(); // Client-only
+    public Dictionary<LevelId, Dictionary<IntVector, List<SeenThingData>>> SeenThings { get; set; } = new();  // Client-only
 
-    private HashSet<IntVector> _wasVisible = new HashSet<IntVector>();
+	private HashSet<IntVector> _wasVisible = new HashSet<IntVector>();
 
     public void RefreshVisibility()
     {
@@ -237,7 +237,7 @@ public partial class RoguemojiPlayer : ThingBrain
             for (int i = things.Count - 1; i >= 0; i--)
             {
                 var data = things[i];
-                Thing thing = Entity.FindByIndex(data.networkIdent) as Thing;
+                Thing thing = FindByIndex(data.networkIdent) as Thing;
 
                 if (thing == null)
                     continue;

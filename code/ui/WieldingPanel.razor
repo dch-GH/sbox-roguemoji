@@ -251,9 +251,9 @@
         var player = RoguemojiGame.Instance.LocalPlayer;
         var wieldedThing = player.ControlledThing.WieldedThing;
         var cooldownHash = (wieldedThing != null && wieldedThing.IsOnCooldown) ? wieldedThing.CooldownProgressPercent : 0f;
-        var statHash = HashCode.Combine(player.ControlledThing.StatHash, wieldedThing?.StatHash ?? 0);
+        var statHash = HashCode.Combine(player.ControlledThing.StatHash, wieldedThing?.StatHash);
         var floaterHash = (wieldedThing != null && wieldedThing.HasFloaters) ? Game.Random.Int(0, 9999) : 0;
-        return HashCode.Combine(wieldedThing?.NetworkIdent ?? 0, cooldownHash, statHash, player.HallucinatingSeed, floaterHash);
+        return HashCode.Combine(wieldedThing?.NetworkIdent, cooldownHash, statHash, player.HallucinatingSeed, floaterHash);
     }
 
     protected override void OnAfterTreeRender(bool firstTime)

@@ -11,7 +11,7 @@ public partial class PotionSleeping : Potion
     public PotionSleeping()
     {
         PotionType = PotionType.Sleeping;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Puts drinker to sleep";

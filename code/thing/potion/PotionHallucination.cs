@@ -11,7 +11,7 @@ public partial class PotionHallucination : Potion
     public PotionHallucination()
     {
         PotionType = PotionType.Hallucination;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Makes drinker hallucinate";

@@ -11,7 +11,7 @@ public partial class PotionOil : Potion
     public PotionOil()
     {
         PotionType = PotionType.Oil;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Flammable oil";

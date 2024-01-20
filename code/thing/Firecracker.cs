@@ -22,7 +22,7 @@ public partial class Firecracker : Thing
         Description = "Stuns anyone who sees it explode";
         Tooltip = "A firecracker";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
         Flammability = 48;
 
         if (Game.IsServer)

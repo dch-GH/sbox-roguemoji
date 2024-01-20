@@ -17,7 +17,7 @@ public partial class OilBarrel : Thing
         Description = "An open barrel of flammable oil";
         Tooltip = "A barrel of oil";
         IconDepth = (int)IconDepthLevel.Solid;
-        Flags = ThingFlags.Solid | ThingFlags.Selectable;
+        ThingFlags = ThingFlags.Solid | ThingFlags.Selectable;
         PathfindMovementCost = 20f;
         Flammability = 9;
         RemainingOilAmount = 4;

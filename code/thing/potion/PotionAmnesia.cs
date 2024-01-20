@@ -12,7 +12,7 @@ public partial class PotionAmnesia : Potion
     public PotionAmnesia()
     {
         PotionType = PotionType.Amnesia;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Forget knowledge of places and things";

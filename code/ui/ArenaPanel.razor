@@ -306,7 +306,7 @@
         return 0;
     }
 
-    protected override IList<Thing> GetThings()
+    protected override List<Thing> GetThings()
     {
         var player = RoguemojiGame.Instance.LocalPlayer;
         return RoguemojiGame.Instance.GetLevel(player.ControlledThing.CurrentLevelId).GridManager?.Things ?? new List<Thing>();

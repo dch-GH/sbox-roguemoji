@@ -11,7 +11,7 @@ public partial class PotionMud : Potion
     public PotionMud()
     {
         PotionType = PotionType.Mud;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Sticky wet mud";

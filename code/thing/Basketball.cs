@@ -13,7 +13,7 @@ public partial class Basketball : Thing
         Description = "Bounces back unless it's caught";
         Tooltip = "A basketball";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
         Flammability = 15;
 
         if (Game.IsServer)

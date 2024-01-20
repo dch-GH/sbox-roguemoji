@@ -12,7 +12,7 @@ public partial class PotionMedicine : Potion
     public PotionMedicine()
     {
         PotionType = PotionType.Medicine;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Cures ailments";

@@ -15,7 +15,7 @@ public partial class Squirrel : Thing
         IconDepth = (int)IconDepthLevel.Solid;
         ShouldUpdate = true;
 		Tooltip = "A squirrel";
-		Flags = ThingFlags.Solid | ThingFlags.Selectable | ThingFlags.CanWieldThings | ThingFlags.CanGainMutations;
+		ThingFlags = ThingFlags.Solid | ThingFlags.Selectable | ThingFlags.CanWieldThings | ThingFlags.CanGainMutations;
         PathfindMovementCost = 5f;
         Faction = FactionType.Enemy;
         Flammability = 13;
@@ -43,7 +43,6 @@ public partial class Squirrel : Thing
     public override void Spawn()
     {
         base.Spawn();
-
     }
 
     public override void OnSpawned()
@@ -59,7 +58,7 @@ public partial class Squirrel : Thing
         Brain.ControlThing(this);
     }
 
-    public override void Destroy()
+    protected override void OnDestroy()
     {
         // todo: dont spawn blood if burned to death
         if(!ContainingGridManager.DoesGridPosContainThingType<PuddleBlood>(GridPos))
@@ -71,6 +70,6 @@ public partial class Squirrel : Thing
         if (Game.Random.Float(0f, 1f) < 0.5f)
             ContainingGridManager.SpawnThing<Bone>(GridPos);
 
-        base.Destroy();
+		base.OnDestroy();
     }
 }

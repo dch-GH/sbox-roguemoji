@@ -9,7 +9,7 @@ public partial class ScrollAwareness : Scroll
     public ScrollAwareness()
 	{
         ScrollType = ScrollType.Awareness;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Become aware of the level layout";

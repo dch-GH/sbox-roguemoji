@@ -13,7 +13,7 @@ public partial class EmptyPotion : Thing
     {
         DisplayIcon = "🧉";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
         DisplayName = "Empty Potion";
         Description = "Can be filled with liquids";
         Tooltip = "An empty potion";

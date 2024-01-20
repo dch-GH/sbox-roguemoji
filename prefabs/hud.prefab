@@ -1,0 +1,28 @@
+{
+  "RootObject": {
+    "Id": "4560dc17-a211-400e-a2b4-7053e7226c78",
+    "Name": "Hud",
+    "Position": "149.995,149.995,-212.125",
+    "Enabled": true,
+    "Components": [
+      {
+        "__version": 0,
+        "__type": "ScreenPanel",
+        "__enabled": true,
+        "AutoScreenScale": true,
+        "Opacity": 1,
+        "Scale": 1,
+        "ZIndex": 100
+      },
+      {
+        "__version": 0,
+        "__type": "HudComponent",
+        "__enabled": true
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

@@ -11,7 +11,7 @@ public partial class PotionSpeed : Potion
     public PotionSpeed()
     {
         PotionType = PotionType.Speed;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Temporarily quickens the drinker";

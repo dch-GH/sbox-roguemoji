@@ -11,7 +11,7 @@ public partial class Backpack : Thing
         Description = "Increases your inventory size";
         IconDepth = (int)IconDepthLevel.Normal;
         Tooltip = "A backpack";
-		Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
+		ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
         Flammability = 20;
     }
 

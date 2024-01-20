@@ -9,7 +9,7 @@ public partial class ScrollTeleport : Scroll
     public ScrollTeleport()
 	{
         ScrollType = ScrollType.Teleport;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Teleport to a random place on the current floor";

@@ -9,7 +9,7 @@ public partial class ScrollConfetti : Scroll
     public ScrollConfetti()
 	{
         ScrollType = ScrollType.Confetti;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = GetDisplayName(ScrollType);
         Description = "Tosses all your items in the air";

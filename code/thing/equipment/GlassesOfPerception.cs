@@ -14,7 +14,7 @@ public partial class GlassesOfPerception : Thing
         Description = "Allows you to see invisible things";
         Tooltip = "Glasses of Perception";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
         Flammability = 13;
 
         SetTattoo("👁️", scale: 0.4f, offset: new Vector2(0f, 0f), offsetWielded: Vector2.Zero, offsetInfo: new Vector2(5f, 4f), offsetCharWielded: Vector2.Zero, offsetInfoWielded: Vector2.Zero);

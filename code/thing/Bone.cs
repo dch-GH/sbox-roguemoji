@@ -10,7 +10,7 @@ public partial class Bone : Thing
 		DisplayName = "Bone";
         IconDepth = (int)IconDepthLevel.Normal;
 		Tooltip = "A bone";
-		Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
+		ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
         Flammability = 8;
 
         if (Game.IsServer)

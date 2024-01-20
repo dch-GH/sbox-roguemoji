@@ -162,7 +162,8 @@
 
     protected override int BuildHash()
     {
-        var inventoryWidthHash = RoguemojiGame.Instance.LocalPlayer.InventoryGridManager.GridWidth;
-        return HashCode.Combine(RoguemojiGame.Instance.LocalPlayer?.SelectedThing?.NetworkIdent ?? 0, inventoryWidthHash);
+        return HashCode.Combine(Time.Now);
+        // var inventoryWidthHash = RoguemojiGame.Instance.LocalPlayer.InventoryGridManager.GridWidth;
+        // return HashCode.Combine(RoguemojiGame.Instance.LocalPlayer?.SelectedThing?.NetworkIdent, inventoryWidthHash);
     }
 }

@@ -13,7 +13,7 @@ public partial class AcademicCap : Thing
         Description = "Makes you feel smarter";
         Tooltip = "An academic cap";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
         Flammability = 24;
 
         if (Game.IsServer)

@@ -14,7 +14,7 @@ public partial class GridManager : Entity
 	[Net] public int GridWidth { get; private set; }
 	[Net] public int GridHeight { get; private set; }
 
-    [Net] public IList<Thing> Things { get; private set; }
+	[Net] public List<Thing> Things { get; private set; } = new();
 	[Net] public GridType GridType { get; set; }
 
     public Dictionary<IntVector, List<Thing>> GridThings = new Dictionary<IntVector, List<Thing>>();
@@ -42,8 +42,6 @@ public partial class GridManager : Entity
 		GridWidth = width;
 		GridHeight = height;
 
-		Transmit = TransmitType.Always;
-
 		Things = new List<Thing>();
 	}
 
@@ -70,7 +68,7 @@ public partial class GridManager : Entity
         HandleFloaters(dt);
     }
 
-	void UpdateThings(IList<Thing> things, float dt)
+	void UpdateThings(List<Thing> things, float dt)
 	{
 		for (int i = things.Count - 1; i >= 0; i--)
 		{
@@ -91,7 +89,9 @@ public partial class GridManager : Entity
     {
         Game.AssertServer();
 
-        var thing = TypeLibrary.GetType(typeof(T)).Create<T>();
+		var go = Scene.CreateObject();
+		var thing = go.Components.Create( TypeLibrary.GetType<T>() ) as Thing;
+		go.Name = thing.DisplayName;
         thing.CurrentLevelId = LevelId;
         AddThing(thing);
         thing.SetGridPos(gridPos, setLastGridPosSame: true);
@@ -101,7 +101,7 @@ public partial class GridManager : Entity
         if ((GridType == GridType.Inventory || GridType == GridType.Equipment) && OwningPlayer != null)
             thing.SetOwningThing(OwningPlayer.ControlledThing);
 
-        return thing;
+        return (T)thing;
     }
 
     public Thing SpawnThing(TypeDescription type, IntVector gridPos)
@@ -520,9 +520,9 @@ public partial class GridManager : Entity
 			{
 				foreach(var cellThing in cellThings)
 				{
-					if( (allFlags == ThingFlags.None || (cellThing.Flags & allFlags) == allFlags) && 
-						(anyFlags == ThingFlags.None || (cellThing.Flags & anyFlags) != 0) && 
-						(noneFlags == ThingFlags.None || (cellThing.Flags & noneFlags) == 0))
+					if( (allFlags == ThingFlags.None || (cellThing.ThingFlags & allFlags) == allFlags) && 
+						(anyFlags == ThingFlags.None || (cellThing.ThingFlags & anyFlags) != 0) && 
+						(noneFlags == ThingFlags.None || (cellThing.ThingFlags & noneFlags) == 0))
 						things.Add(cellThing);
                 }
 			}
@@ -539,9 +539,9 @@ public partial class GridManager : Entity
         {
             foreach (var cellThing in cellThings)
             {
-                if ((allFlags == ThingFlags.None || (cellThing.Flags & allFlags) == allFlags) &&
-                    (anyFlags == ThingFlags.None || (cellThing.Flags & anyFlags) != 0) &&
-                    (noneFlags == ThingFlags.None || (cellThing.Flags & noneFlags) == 0))
+                if ((allFlags == ThingFlags.None || (cellThing.ThingFlags & allFlags) == allFlags) &&
+                    (anyFlags == ThingFlags.None || (cellThing.ThingFlags & anyFlags) != 0) &&
+                    (noneFlags == ThingFlags.None || (cellThing.ThingFlags & noneFlags) == 0))
                     things.Add(cellThing);
             }
         }

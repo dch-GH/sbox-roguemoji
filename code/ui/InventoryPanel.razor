@@ -128,7 +128,7 @@
     public override int GridWidth => RoguemojiGame.Instance.LocalPlayer.InventoryGridManager.GridWidth;
     public override int GridHeight => RoguemojiGame.Instance.LocalPlayer.InventoryGridManager.GridHeight;
 
-    protected override IList<Thing> GetThings()
+    protected override List<Thing> GetThings()
     {
         return RoguemojiGame.Instance.LocalPlayer.InventoryGridManager.Things;
     }
@@ -163,7 +163,7 @@
     {
         var player = RoguemojiGame.Instance.LocalPlayer;
         var gridWidthHash = player.InventoryGridManager.GridWidth;
-        var selectedThingHash = player.SelectedThing?.NetworkIdent ?? 0;
+        var selectedThingHash = player.SelectedThing?.NetworkIdent;
         var aimingHash = player.IsAiming && player.AimingGridType == GridType.Inventory ? Game.Random.Int(0, 9999) : 0;
         var floaterHash = player.InventoryGridManager.Floaters.Count > 0 ? Game.Random.Int(0, 9999) : 0;
 

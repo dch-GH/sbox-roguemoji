@@ -66,17 +66,17 @@ public static class Utils
 
     public static IEnumerable<Thing> WithAll(this IEnumerable<Thing> list, ThingFlags flags)
     {
-        return list.Where(x => (x.Flags & flags) == flags);
+        return list.Where(x => (x.ThingFlags & flags) == flags);
     }
 
     public static IEnumerable<Thing> WithAny(this IEnumerable<Thing> list, ThingFlags flags)
     {
-        return list.Where(x => (x.Flags & flags) != 0);
+        return list.Where(x => (x.ThingFlags & flags) != 0);
     }
 
     public static IEnumerable<Thing> WithNone(this IEnumerable<Thing> list, ThingFlags flags)
     {
-        return list.Where(x => (x.Flags & flags) == 0);
+        return list.Where(x => (x.ThingFlags & flags) == 0);
     }
 
     public static void DrawCircle(Vector2 pos, float radius, int num_segments, float starting_angle, Color color)
@@ -396,7 +396,7 @@ public static class Utils
         else return BounceOut(t * 2f - 1f) * 0.5f + 0.5f;
     }
 
-    public static void Shuffle<T>(this IList<T> list)
+    public static void Shuffle<T>(this List<T> list)
     {
         System.Random rng = new System.Random();
         int n = list.Count;

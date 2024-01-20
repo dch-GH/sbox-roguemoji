@@ -11,7 +11,7 @@ public partial class PotionInvisible : Potion
     public PotionInvisible()
     {
         PotionType = PotionType.Invisibility;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Makes things temporarily invisible";

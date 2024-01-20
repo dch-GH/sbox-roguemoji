@@ -12,7 +12,7 @@ public partial class PotionMana : Potion
     public PotionMana()
     {
         PotionType = PotionType.Mana;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Recover some mana";

@@ -16,7 +16,7 @@ public partial class Trumpet : Thing
         Description = "Loud and annoying";
         Tooltip = "A trumpet";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
         Flammability = 6;
 
         if (Game.IsServer)

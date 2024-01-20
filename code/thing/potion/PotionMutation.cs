@@ -12,7 +12,7 @@ public partial class PotionMutation : Potion
     public PotionMutation()
     {
         PotionType = PotionType.Mutation;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Causes unpredictable changes";

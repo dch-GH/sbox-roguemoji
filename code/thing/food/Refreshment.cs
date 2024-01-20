@@ -15,7 +15,7 @@ public partial class Refreshment : Thing
         Description = "Refreshes your item cooldowns";
         Tooltip = "A refreshment";
         IconDepth = (int)IconDepthLevel.Normal;
-        Flags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
         Flammability = 13;
 
         if (Game.IsServer)

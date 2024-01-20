@@ -4,7 +4,7 @@ using System;
 namespace Roguemoji;
 public partial class Leaf : Thing
 {
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🍂";
         DisplayName = "Leaves";

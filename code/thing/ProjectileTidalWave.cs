@@ -7,7 +7,7 @@ public partial class ProjectileTidalWave : Thing
 {
     public int SlamDamage { get; set; }
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = Globals.Icon(IconType.Wave);
         DisplayName = "Wave";

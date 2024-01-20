@@ -544,8 +544,8 @@ public partial class RoguemojiPlayer : ThingBrain
 		ConfusionSeed = 0;
 		HallucinatingSeed = 0;
 
-		var ghost = ControlledThing.ContainingGridManager.SpawnThing<Ghost>(ControlledThing.GridPos);
-		ControlThing(ghost);
+		var ghost = ControlledThing.ContainingGridManager.SpawnThing<Ghost>( ControlledThing.GridPos );
+		ControlThing( ghost );
 		ghost.DisplayName = $"Ghost of {Client.Name}";
 		ghost.Tooltip = $"The ghost of {Client.Name}";
 	}

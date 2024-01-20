@@ -6,9 +6,8 @@ public partial class Smiley : Thing
 	public CActing Acting { get; private set; }
 	public CIconPriority IconPriority { get; private set; }
 
-	protected override void OnAwake()
+	public override void OnSpawned()
 	{
-		base.OnAwake();
 		ShouldUpdate = true;
 		DisplayName = "Smiley";
 		Tooltip = "";
@@ -22,7 +21,7 @@ public partial class Smiley : Thing
 
 		Acting = AddComponent<CActing>();
 		IconPriority = AddComponent<CIconPriority>();
-		IconPriority.SetDefaultIcon( "😀" );
+		IconPriority.SetDefaultIcon("😀");
 	}
 
 	void SetStartingValues()

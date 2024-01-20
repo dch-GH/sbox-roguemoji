@@ -28,11 +28,6 @@ public partial class Trait : Entity
     [Net] public bool IsAbility { get; set; }
     public int Hash => HashCode.Combine(Icon, HasTattoo ? TattooIcon : "", HasLabel ? LabelText : "", BarPercent);
 
-    protected override void OnAwake()
-    {
-
-    }
-
     public void SetTattoo(string icon, float scale, Vector2 offset)
     {
         HasTattoo = true;

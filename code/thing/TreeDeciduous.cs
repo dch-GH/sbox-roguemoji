@@ -8,8 +8,7 @@ public partial class TreeDeciduous : Thing
 	public bool HasDroppedLeaf { get; private set; }
 
 	public int HealthAmount { get; set; }
-	bool spawned = false;
-	protected override void OnAwake()
+	public override void OnSpawned()
 	{
 		DisplayIcon = "🌳";
 		DisplayName = "Tree";
@@ -33,14 +32,7 @@ public partial class TreeDeciduous : Thing
 			InfoWieldedThingOffset = new Vector2( 16f, 19f );
 			InfoWieldedThingFontSize = 26;
 		}
-		OnSpawned();
-	}
 
-	public override void OnSpawned()
-	{
-		if ( spawned )
-			return;
-		spawned = true;
 		if ( Game.Random.Float( 0f, 1f ) < 0.33f )
 		{
 			int randItemNum = Game.Random.Int( 0, 11 );

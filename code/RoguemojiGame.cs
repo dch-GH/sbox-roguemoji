@@ -269,9 +269,7 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
         player.RecenterCamera();
         player.RefreshVisibility();
 
-        player.ControlledThing.AddComponent<COrganizeDebug>();
-
-
+        //player.ControlledThing.AddComponent<COrganizeDebug>();
     }
 
     public void OnDisconnected(Connection conn)

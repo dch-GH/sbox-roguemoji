@@ -10,7 +10,7 @@ public partial class Joystick : Thing
     public float CooldownTime { get; private set; }
     public override string AbilityName => "Move";
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🕹️";
         DisplayName = "Joystick";

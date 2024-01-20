@@ -15,7 +15,7 @@ public partial class Firecracker : Thing
 
     public override string ChatDisplayIcons => $"🧨{(IsLit ? Globals.Icon(IconType.Fire) : "")}";
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🧨";
         DisplayName = "Firecracker";

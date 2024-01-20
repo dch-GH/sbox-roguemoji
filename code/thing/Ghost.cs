@@ -6,7 +6,7 @@ public partial class Ghost : Thing
 
     // todo: make inflammable
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         ShouldUpdate = true;
         DisplayName = "Ghost";

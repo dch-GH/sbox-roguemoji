@@ -11,7 +11,7 @@ public partial class RugbyBall : Thing
 
     public override string AbilityName => "Charge";
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🏉";
         DisplayName = "Rugby Ball";

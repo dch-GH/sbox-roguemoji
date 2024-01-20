@@ -49,7 +49,7 @@ public partial class Thing : Entity
 	[Net] public GridType ContainingGridType { get; set; }
 	[Net] public GridManager ContainingGridManager { get; set; }
 
-	[Net] public string DisplayIcon { get; protected set; }
+	[Net] public string DisplayIcon { get; set; }
 	[Net] public string DisplayName { get; set; }
 	[Net] public string Description { get; protected set; }
 	[Net] public string Tooltip { get; set; }
@@ -140,11 +140,11 @@ public partial class Thing : Entity
 		IsInTransit = false;
 		TimeSinceLocalPlayerSaw = 999f;
 
-		if (Game.IsClient)
+		if ( Game.IsClient )
 		{
-			WieldedThingOffset = new Vector2(20f, 17f);
+			WieldedThingOffset = new Vector2( 20f, 17f );
 			WieldedThingFontSize = 18;
-			InfoWieldedThingOffset = new Vector2(38f, 38f);
+			InfoWieldedThingOffset = new Vector2( 38f, 38f );
 			InfoWieldedThingFontSize = 32;
 		}
 	}
@@ -152,7 +152,7 @@ public partial class Thing : Entity
 	public virtual void Update(float dt)
 	{
 		//DebugText = IgnitionAmount > 0 ? $"{IgnitionAmount}" : "";
-
+		ClientTick();
 		if (Brain != null)
 			Brain.Update(dt);
 

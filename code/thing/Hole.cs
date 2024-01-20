@@ -4,7 +4,7 @@ using System;
 namespace Roguemoji;
 public partial class Hole : Thing
 {
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "️🕳";
         DisplayName = "Hole";

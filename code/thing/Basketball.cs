@@ -6,7 +6,7 @@ using System.Linq;
 namespace Roguemoji;
 public partial class Basketball : Thing
 {
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🏀";
         DisplayName = "Basketball";

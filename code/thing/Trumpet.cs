@@ -9,7 +9,7 @@ public partial class Trumpet : Thing
 
     public override string AbilityName => "Blow Trumpet";
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🎺";
         DisplayName = "Trumpet";

@@ -27,11 +27,10 @@ public abstract class ThingComponent : Sandbox.Component
     {
 		var dt = Time.Delta;
         TimeElapsed += dt;
-
-        if (IsClientComponent == Game.IsServer)
-        {
-            Log.Error(GetType().Name + " IsClientComponent: " + IsClientComponent + " IsServer: " + Game.IsServer + "!");
-        }
+        //if (IsClientComponent == Game.IsServer)
+        //{
+        //    Log.Error(GetType().Name + " IsClientComponent: " + IsClientComponent + " IsServer: " + Game.IsServer + "!");
+        //}
     }
 
     // component was added when already existing
@@ -42,7 +41,7 @@ public abstract class ThingComponent : Sandbox.Component
 
     public virtual void Remove()
     {
-        Thing.RemoveComponent(TypeLibrary.GetType(GetType()));
+		Destroy();
     }
 
     public virtual void OnWieldThing(Thing thing) { }

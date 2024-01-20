@@ -25,7 +25,6 @@ public partial class Stat : Entity
 
     protected override void OnAwake()
     {
-
         CurrentValue = 0;
     }
 }

@@ -7,7 +7,7 @@ public partial class Golem : Thing
     public CTargeting Targeting { get; private set; }
     public CActing Acting { get; private set; }
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🗿";
         DisplayName = "Golem";
@@ -27,9 +27,9 @@ public partial class Golem : Thing
             InitStat(StatType.SightBlockAmount, 20);
         }
 
-		Targeting = AddComponent<CTargeting>();
-		Acting = AddComponent<CActing>();
-		Acting.ActionDelay = 1.5f;
-		Acting.ActionTimer = Game.Random.Float( 0f, 1.5f );
-	}
+        Targeting = AddComponent<CTargeting>();
+        Acting = AddComponent<CActing>();
+        Acting.ActionDelay = 1.5f;
+        Acting.ActionTimer = Game.Random.Float(0f, 1.5f);
+    }
 }

@@ -53,12 +53,13 @@ public partial class PotionMutation : Potion
                 possibleMutations.RemoveAt(i);
         }
 
-        if (possibleMutations.Count > 0)
-        {
-            var selectedType = possibleMutations[Game.Random.Int(0, possibleMutations.Count - 1)];
-            thing.AddComponent(selectedType);
+        if (possibleMutations.Count > 0 )
+		{
+			var selectedType = possibleMutations[Game.Random.Int( 0, possibleMutations.Count - 1 )];
+			// TODO:
+			//thing.AddComponent(selectedType);
 
-            thing.AddFloater(Globals.Icon(IconType.Mutation), 1.2f, new Vector2(0, -3f), new Vector2(0, -12f), height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: true, EasingType.SineOut, fadeInTime: 0.15f);
+			thing.AddFloater(Globals.Icon(IconType.Mutation), 1.2f, new Vector2(0, -3f), new Vector2(0, -12f), height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: true, EasingType.SineOut, fadeInTime: 0.15f);
         }
     }
 

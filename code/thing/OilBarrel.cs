@@ -8,7 +8,7 @@ public partial class OilBarrel : Thing
 
 	// todo: barrel explodes with fiery oil puddles if ignited
 
-	protected override void OnAwake()
+	public override void OnSpawned()
 	{
 		DisplayIcon = "️🛢";
 		DisplayName = "Oil Barrel";

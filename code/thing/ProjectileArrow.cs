@@ -6,7 +6,7 @@ public partial class ProjectileArrow : Thing
 {
     public Direction Direction { get; set; }
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🔰";
         DisplayName = "Arrow";

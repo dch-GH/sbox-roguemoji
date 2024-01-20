@@ -5,7 +5,7 @@ namespace Roguemoji;
 
 public class VfxShake : ThingComponent
 {
-    public float Lifetime { get; set; }
+	public float Lifetime { get; set; }
     public float Distance { get; set; }
 
     public override void Init(Thing thing)
@@ -21,8 +21,10 @@ public class VfxShake : ThingComponent
         var dir = Utils.DegreesToVector(Game.Random.Float(0f, 360f));
         Thing.SetShakeOffset(dir * Utils.Map(TimeElapsed, 0f, Lifetime, Distance, 0f, EasingType.QuadOut));
 
-        if(TimeElapsed > Lifetime)
-            Remove();
+        //if(TimeElapsed > Lifetime)
+        //    Remove();
+
+		base.OnUpdate();
     }
 
     public override void OnRemove()

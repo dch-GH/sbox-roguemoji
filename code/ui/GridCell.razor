@@ -172,6 +172,11 @@
         var wieldedThing = Thing.WieldedThing;
         var wieldedOffset = Thing.WieldedThingOffset;
 
+        if(wieldedThing.DisplayIcon is null)
+        {
+            wieldedThing.DisplayIcon = "⁉️";
+        }
+
         if (playerThing.CanPerceiveThing(wieldedThing))
         {
             <div class="wielded_thing @GetCooldownClass(wieldedThing)" style="left:@(wieldedOffset.x)px; top:@(wieldedOffset.y)px; font-size:@(Thing.WieldedThingFontSize); opacity:@(Hud.GetOpacity(Thing.WieldedThing)); @(Hud.GetBrightness(Thing.WieldedThing))">

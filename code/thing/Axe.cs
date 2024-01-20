@@ -8,7 +8,7 @@ public partial class Axe : Thing
 	public int DurabilityCost { get; private set; }
 	public int TreeAttackAmount { get; private set; }
 
-	protected override void OnAwake()
+	public override void OnSpawned()
 	{
 		DisplayIcon = "🪓";
 		DisplayName = "Axe";

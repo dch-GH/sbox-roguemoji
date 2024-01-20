@@ -7,7 +7,7 @@ public partial class ProjectileFireball : Thing
 {
     public int ExplosionDamage { get; set; }
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = Globals.Icon(IconType.Fire);
         DisplayName = "Fireball";

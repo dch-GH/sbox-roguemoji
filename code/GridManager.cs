@@ -89,6 +89,10 @@ public partial class GridManager : Entity
 	{
 		Game.AssertServer();
 
+		// Prevent the scene editor from corrupting the scene state and making us double tap F5.
+		if ( !GameManager.IsPlaying )
+			return null;
+
 		var go = Scene.CreateObject();
 		var typeDescription = TypeLibrary.GetType<T>();
 
@@ -117,8 +121,8 @@ public partial class GridManager : Entity
 		AddThing( thing );
 		thing.SetGridPos( gridPos, setLastGridPosSame: true );
 
-		Log.Info( go );
 		thing.OnSpawned();
+		Log.Info( thing.DisplayName );
 
 		if ( (GridType == GridType.Inventory || GridType == GridType.Equipment) && OwningPlayer != null )
 			thing.SetOwningThing( OwningPlayer.ControlledThing );

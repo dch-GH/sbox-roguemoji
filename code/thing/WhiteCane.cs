@@ -7,7 +7,7 @@ public partial class WhiteCane : Thing
     public int MinSightChange { get; set; }
     public Trait Trait { get; private set; }
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🦯";
         DisplayName = "White Cane";

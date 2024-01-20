@@ -6,7 +6,7 @@ public partial class TreeEvergreen : Thing
 {
     public int HealthAmount { get; set; }
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🌲";
         DisplayName = "Tree";
@@ -24,6 +24,7 @@ public partial class TreeEvergreen : Thing
             InitStat(StatType.Health, HealthAmount, min: 0, max: HealthAmount);
         }
     }
+
     public override void GetSound(SoundActionType actionType, SurfaceType surfaceType, out string sfxName, out int loudness)
     {
         switch (actionType)

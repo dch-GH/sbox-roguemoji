@@ -8,7 +8,7 @@ public partial class Telescope : Thing
     public int SpeedAmount { get; private set; }
     public float CooldownTime { get; private set; }
 
-    protected override void OnAwake()
+    public override void OnSpawned()
     {
         DisplayIcon = "🔭";
         DisplayName = "Telescope";

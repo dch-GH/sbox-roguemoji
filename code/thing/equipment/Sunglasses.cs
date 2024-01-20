@@ -8,9 +8,9 @@ public partial class Sunglasses : Thing
     public int SightAmount { get; private set; }
     public int IconId { get; set; }
 
-    public Sunglasses()
-	{
-		DisplayIcon = "🕶️";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🕶️";
         DisplayName = "Sunglasses";
         Description = "Obscures your vision but looks cool";
         Tooltip = "A pair of sunglasses";
@@ -35,7 +35,7 @@ public partial class Sunglasses : Thing
         foreach (var pair in Stats)
             thing.AdjustStat(pair.Key, pair.Value.CurrentValue);
 
-        if(thing is Smiley smiley)
+        if (thing is Smiley smiley)
         {
             if (thing.GetComponent<CIconPriority>(out var component))
             {

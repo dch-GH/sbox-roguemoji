@@ -8,7 +8,7 @@ public partial class PotionHallucination : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Hallucination);
 
-    public PotionHallucination()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Hallucination;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionHallucination : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Makes drinker hallucinate";
         Tooltip = "A hallucination potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Hallucination));
 
         if (Game.IsServer)

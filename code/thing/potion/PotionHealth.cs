@@ -9,7 +9,7 @@ public partial class PotionHealth : Potion
     public override string SplashIcon => GetStatIcon(StatType.Health);
     public int HealthAmount { get; private set; }
 
-    public PotionHealth()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Health;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -17,7 +17,7 @@ public partial class PotionHealth : Potion
         DisplayName = DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Recover some health";
         Tooltip = "A health potion";
-        
+
         SetTattoo(GetStatIcon(StatType.Health));
 
         if (Game.IsServer)

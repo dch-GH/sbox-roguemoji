@@ -7,8 +7,8 @@ using System.Linq;
 namespace Roguemoji;
 public partial class ScrollSentience : Scroll
 {
-    public ScrollSentience()
-	{
+    protected override void OnAwake()
+    {
         ScrollType = ScrollType.Sentience;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
 
@@ -33,7 +33,7 @@ public partial class ScrollSentience : Scroll
 
         var thing = user.ContainingGridManager.GetThingsAt(targetGridPos).WithAll(ThingFlags.Selectable).Where(x => x.Brain == null).Where(x => ScrollSentience.CanGainSentience(x)).OrderByDescending(x => x.GetZPos()).FirstOrDefault();
 
-        if(thing != null)
+        if (thing != null)
         {
             var brain = new SquirrelBrain();
             brain.ControlThing(thing);

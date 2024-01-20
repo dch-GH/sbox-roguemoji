@@ -2,7 +2,7 @@
 
 namespace Roguemoji;
 
-public partial class Level : Entity
+public partial class Level : Component
 {
 	[Net] public GridManager GridManager { get; private set; }
 
@@ -14,7 +14,7 @@ public partial class Level : Entity
     public LevelData LevelData { get; private set; }
 
     [Net] public SurfaceType SurfaceType { get; private set; }
-
+	
     public void Init(LevelId levelId)
     {
         LevelId = levelId;
@@ -38,8 +38,8 @@ public partial class Level : Entity
         Icon = LevelData.Icon;
         SurfaceType = LevelData.SurfaceType;
 
-        SpawnStartingThings();
-    }
+		SpawnStartingThings();
+	}
 
     public void Update(float dt)
     {

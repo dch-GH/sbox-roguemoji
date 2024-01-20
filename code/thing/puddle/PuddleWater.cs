@@ -5,9 +5,9 @@ using System.Linq;
 namespace Roguemoji;
 public partial class PuddleWater : Puddle
 {
-	public PuddleWater()
-	{
-		DisplayIcon = "💧";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "💧";
         DisplayName = "Puddle of Water";
         Description = "The ground is covered in a layer of water";
         Tooltip = "A puddle of water";
@@ -25,13 +25,13 @@ public partial class PuddleWater : Puddle
 
         _elapsedTime += dt;
 
-        if(_iconState == 0 && _elapsedTime > 0.25f)
+        if (_iconState == 0 && _elapsedTime > 0.25f)
         {
             _iconState++;
             DisplayIcon = "🔵";
             IconDepth = (int)IconDepthLevel.Puddle;
         }
-        else if(_iconState == 1 && _elapsedTime > 0.4f)
+        else if (_iconState == 1 && _elapsedTime > 0.4f)
         {
             _iconState++;
             DisplayIcon = "🟦";
@@ -78,7 +78,7 @@ public partial class PuddleWater : Puddle
         if (player == null)
             return;
 
-        foreach(var item in player.InventoryGridManager.GetAllThings().Where(x => x.HasComponent<CBurning>()))
+        foreach (var item in player.InventoryGridManager.GetAllThings().Where(x => x.HasComponent<CBurning>()))
         {
             if (item.GetComponent<CBurning>(out var itemComponent))
             {

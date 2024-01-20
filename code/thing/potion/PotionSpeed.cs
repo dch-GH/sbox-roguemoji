@@ -8,7 +8,7 @@ public partial class PotionSpeed : Potion
 {
     public override string SplashIcon => Thing.GetStatIcon(StatType.Speed);
 
-    public PotionSpeed()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Speed;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionSpeed : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Temporarily quickens the drinker";
         Tooltip = "A speed potion";
-        
+
         SetTattoo(Thing.GetStatIcon(StatType.Speed));
 
         if (Game.IsServer)

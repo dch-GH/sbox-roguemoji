@@ -27,11 +27,10 @@ public class CConfused : ThingComponent
             IconId = ((CIconPriority)component).AddIconPriority("😵", (int)PlayerIconPriority.Confused);
     }
 
-    public override void Update(float dt)
-    {
-        base.Update(dt);
-
-        TimeElapsed += dt;
+	protected override void OnUpdate()
+	{
+		var dt = Time.Delta;
+		TimeElapsed += dt;
         if(Lifetime > 0f && TimeElapsed > Lifetime)
         {
             Remove();

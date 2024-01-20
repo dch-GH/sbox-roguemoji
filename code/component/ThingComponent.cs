@@ -14,7 +14,7 @@ public abstract class ThingComponent : Sandbox.Component
 
 	protected override void OnAwake()
 	{
-		var thing = GameObject.Components.Get<Thing>();
+		Thing = GameObject.Components.Get<Thing>();
 		ShouldUpdate = false;
 		TimeElapsed = 0f;
 	}
@@ -23,8 +23,9 @@ public abstract class ThingComponent : Sandbox.Component
     {
     }
 
-    public virtual void Update(float dt)
+	protected override void OnUpdate()
     {
+		var dt = Time.Delta;
         TimeElapsed += dt;
 
         if (IsClientComponent == Game.IsServer)

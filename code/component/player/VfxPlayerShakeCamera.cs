@@ -16,14 +16,14 @@ public class VfxPlayerShakeCamera : PlayerComponent
         IsClientComponent = true;
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         var dir = Utils.DegreesToVector(Game.Random.Float(0f, 360f));
         Player.SetCameraPixelOffset(dir * Utils.Map(TimeElapsed, 0f, Lifetime, Distance, 0f, EasingType.QuadOut));
 
-        if(TimeElapsed > Lifetime)
+        if (TimeElapsed > Lifetime)
             Remove();
     }
 

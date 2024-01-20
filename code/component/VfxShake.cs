@@ -16,10 +16,8 @@ public class VfxShake : ThingComponent
         IsClientComponent = true;
     }
 
-    public override void Update(float dt)
-    {
-        base.Update(dt);
-
+	protected override void OnUpdate()
+	{
         var dir = Utils.DegreesToVector(Game.Random.Float(0f, 360f));
         Thing.SetShakeOffset(dir * Utils.Map(TimeElapsed, 0f, Lifetime, Distance, 0f, EasingType.QuadOut));
 

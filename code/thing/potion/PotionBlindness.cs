@@ -8,7 +8,7 @@ public partial class PotionBlindness : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Blindness);
 
-    public PotionBlindness()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Blindness;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionBlindness : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Blinds the drinker";
         Tooltip = "A blindness potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Blindness));
 
         if (Game.IsServer)

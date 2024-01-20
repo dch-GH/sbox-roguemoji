@@ -6,7 +6,7 @@ using System.Linq;
 namespace Roguemoji;
 public partial class ScrollFireball : Scroll
 {
-    public ScrollFireball()
+    protected override void OnAwake()
     {
         ScrollType = ScrollType.Fireball;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;

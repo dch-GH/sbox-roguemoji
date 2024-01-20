@@ -40,6 +40,7 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 	public static uint ThingId { get; set; }
 
 	[Property] public GameObject _hudPrefab { get; set; }
+	[Property] public Level _level { get; set; }
 	public Hud Hud { get; set; }
 
 	public const int CellSize = 42;
@@ -111,13 +112,6 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 	protected override void OnEnabled()
 	{
 		Instance = this;
-
-		var hud = _hudPrefab.Clone();
-		hud.BreakFromPrefab();
-
-		var hc = hud.Components.Get<HudComponent>();
-		Hud = hc.Hud;
-
 		_panelsToFlicker = new List<PanelFlickerData>();
 	}
 
@@ -147,21 +141,16 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 
 	HashSet<LevelId> _occupiedLevelIds = new HashSet<LevelId>();
 
-	protected override void OnFixedUpdate()
+	protected override void OnUpdate()
 	{
-		float dt = Time.Delta;
+		var dt = Time.Delta;
+		Game.LocalPlayer ??= Scene.GetAllComponents<RoguemojiPlayer>().First();
 
 		foreach ( var levelId in GetOccupiedLevels() )
 		{
 			Level level = Levels[levelId];
 			level.Update( dt );
 		}
-	}
-
-	protected override void OnUpdate()
-	{
-		Game.LocalPlayer ??= Scene.GetAllComponents<RoguemojiPlayer>().First();
-		var dt = Time.Delta;
 
 		//if ( Hud.MainPanel.LogPanel != null )
 		//{
@@ -221,7 +210,6 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 		Instance = this;
 		Levels = new Dictionary<LevelId, Level>();
 		CreateLevel( LevelId.Forest1 );
-		//CreateLevel(LevelId.Test0);
 
 		Players = new List<RoguemojiPlayer>();
 
@@ -232,7 +220,10 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 		Log.Info( $"Player '{channel.DisplayName}' has joined the game" );
 
 		if ( PlayerPrefab is null )
+		{
+			Log.Error( "player prefab is null" );
 			return;
+		}
 
 		var pawn = PlayerPrefab.Clone( new global::Transform( Vector3.Zero, Rotation.Identity, 1 ), name: $"Player - {channel.DisplayName}" );
 		pawn.BreakFromPrefab();
@@ -273,6 +264,11 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 
 		player.ControlledThing.AddComponent<COrganizeDebug>();
 
+		var hud = _hudPrefab.Clone();
+		hud.BreakFromPrefab();
+
+		var hc = hud.Components.Get<HudComponent>();
+		Hud = hc.Hud;
 	}
 
 	public void OnDisconnected( Connection conn )
@@ -307,7 +303,7 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 		Hud.MainPanel.LogPanel.WriteMessage( text, playerNum );
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void ChatMessageCmd( string text, int playerNum )
 	{
 		RoguemojiGame.Instance.ChatMessageClient( text, playerNum );
@@ -325,31 +321,32 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 		Hud.MainPanel.ChatPanel.WriteMessage( text, playerNum );
 	}
 
-	[Broadcast]
+	////[Broadcast]
 	public static void GridCellClickedCmd( int x, int y, GridType gridType, bool rightClick, bool shift, bool doubleClick, bool visible = true )
 	{
-		var player = Rpc.Caller.Pawn();
+		//var player =  RoguemojiGame.Instance.LocalPlayer;
+		var player = RoguemojiGame.Instance.LocalPlayer;
 		player.GridCellClicked( new IntVector( x, y ), gridType, rightClick, shift, doubleClick, visible );
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void ClickedNothing()
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		player.ClickedNothing();
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void ConfirmAimingCmd( GridType gridType, int x, int y )
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		player.ConfirmAiming( gridType, new IntVector( x, y ) );
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void StopAimingCmd()
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		player.StopAiming();
 	}
 
@@ -362,10 +359,10 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 			panel.StateHasChanged();
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void NearbyThingClickedCmd( Guid networkIdent, bool rightClick, bool shift, bool doubleClick )
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		Thing thing = player.FindByIndex( networkIdent ) as Thing;
 
 		if ( thing.ContainingGridType != GridType.Arena )
@@ -411,41 +408,41 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 		_panelsToFlicker.Add( new PanelFlickerData( panel ) );
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void InventoryThingDraggedCmd( Guid networkIdent, PanelType destinationPanelType, int x, int y, bool wieldedThingDragged )
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		Thing thing = player.FindByIndex( networkIdent ) as Thing;
 		player.InventoryThingDragged( thing, destinationPanelType, new IntVector( x, y ), wieldedThingDragged );
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void EquipmentThingDraggedCmd( Guid networkIdent, PanelType destinationPanelType, int x, int y )
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		Thing thing = player.FindByIndex( networkIdent ) as Thing;
 		player.EquipmentThingDragged( thing, destinationPanelType, new IntVector( x, y ) );
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void NearbyThingDraggedCmd( Guid networkIdent, PanelType destinationPanelType, int x, int y )
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		Thing thing = player.FindByIndex( networkIdent ) as Thing;
 		player.NearbyThingDragged( thing, destinationPanelType, new IntVector( x, y ) );
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void WieldingClickedCmd( bool rightClick, bool shift )
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		player.WieldingClicked( rightClick, shift );
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void PlayerIconClickedCmd( bool rightClick, bool shift )
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		player.PlayerIconClicked( rightClick, shift );
 	}
 
@@ -510,7 +507,7 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 		Log.Info( $"# Entities: {Entity.All.Count()}" );
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public void ResetHudClient( To to )
 	{
 		Hud.Restart();
@@ -542,11 +539,10 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 
 	Level CreateLevel( LevelId levelId )
 	{
-		var level = new Level();
-		level.Init( levelId );
-		Levels.Add( levelId, level );
+		_level.Init( levelId );
+		Levels.Add( levelId, _level );
 
-		return level;
+		return _level;
 	}
 
 	public Level GetLevel( LevelId levelId )
@@ -588,10 +584,10 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 		}
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void RevealScrollCmd( ScrollType scrollType )
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		player.IdentifyScroll( scrollType );
 	}
 
@@ -614,10 +610,10 @@ public partial class RoguemojiGame : Sandbox.Component, Component.INetworkListen
 		}
 	}
 
-	[Broadcast]
+	//[Broadcast]
 	public static void RevealPotionCmd( PotionType potionType )
 	{
-		var player = Rpc.Caller.Pawn();
+		var player =  RoguemojiGame.Instance.LocalPlayer;
 		player.IdentifyPotion( potionType );
 	}
 

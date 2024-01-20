@@ -8,7 +8,7 @@ public partial class PotionLava : Potion
 {
     public override string SplashIcon => "🟠";
 
-    public PotionLava()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Lava;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionLava : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Burning hot lava";
         Tooltip = "A lava potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Lava));
 
         if (Game.IsServer)

@@ -16,13 +16,13 @@ public class CTempIconDepth : ThingComponent
         ShouldUpdate = true;
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         TimeElapsed += dt;
 
-        if(TimeElapsed > Lifetime)
+        if (TimeElapsed > Lifetime)
             Remove();
     }
 

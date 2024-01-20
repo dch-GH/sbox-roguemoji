@@ -11,21 +11,22 @@ public partial class Smiley : Thing
     public CActing Acting { get; private set; }
     public CIconPriority IconPriority { get; private set; }
 
-    public Smiley()
+	protected override void OnAwake()
 	{
-        ShouldUpdate = true;
+		base.OnAwake();
+		ShouldUpdate = true;
 		DisplayName = "Smiley";
 		Tooltip = "";
-        PathfindMovementCost = 10f;
-        Flammability = 13;
+		PathfindMovementCost = 10f;
+		Flammability = 13;
 
-        if (Game.IsServer)
-        {
-            SetStartingValues();
-        }
+		if ( Game.IsServer )
+		{
+			SetStartingValues();
+		}
 	}
 
-    public override void Spawn()
+	public override void Spawn()
     {
         base.Spawn();
 

@@ -28,11 +28,11 @@ public class CExitingLevel : ThingComponent
         Thing.IsInTransit = true;
     }
 
-    public override void Update(float dt)
-    {
-        base.Update(dt);
+	protected override void OnUpdate()
+	{
+		var dt = Time.Delta;
 
-        TimeElapsed += dt;
+		TimeElapsed += dt;
 
         if(TimeElapsed > Lifetime)
         {

@@ -12,8 +12,8 @@ public partial class Puddle : Thing
 
     public PotionType LiquidType { get; protected set; }
 
-	public Puddle()
-	{
+    protected override void OnAwake()
+    {
         IconDepth = (int)IconDepthLevel.Normal;
         ShouldUpdate = true;
         ThingFlags = ThingFlags.Selectable | ThingFlags.Puddle | ThingFlags.CantBePushed;

@@ -6,7 +6,7 @@ using System.Linq;
 namespace Roguemoji;
 public partial class ScrollTelekinesis : Scroll
 {
-    public ScrollTelekinesis()
+    protected override void OnAwake()
     {
         ScrollType = ScrollType.Telekinesis;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;

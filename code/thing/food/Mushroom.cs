@@ -6,7 +6,7 @@ public partial class Mushroom : Thing
 {
     public override string AbilityName => "Eat";
 
-    public Mushroom()
+    protected override void OnAwake()
     {
         DisplayIcon = "🍄";
         DisplayName = "Mushroom";

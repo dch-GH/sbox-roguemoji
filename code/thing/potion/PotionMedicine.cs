@@ -9,7 +9,7 @@ public partial class PotionMedicine : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Medicine);
 
-    public PotionMedicine()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Medicine;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -17,7 +17,7 @@ public partial class PotionMedicine : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Cures ailments";
         Tooltip = "A medicine potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Medicine));
 
         if (Game.IsServer)
@@ -41,7 +41,7 @@ public partial class PotionMedicine : Potion
 
     public override void ApplyEffectToThing(Thing thing)
     {
-        if(thing.HasComponent<CPoisoned>() || thing.HasComponent<CHallucinating>() || thing.HasComponent<CConfused>() || thing.HasComponent<CBlinded>() || thing.HasComponent<CFearful>())
+        if (thing.HasComponent<CPoisoned>() || thing.HasComponent<CHallucinating>() || thing.HasComponent<CConfused>() || thing.HasComponent<CBlinded>() || thing.HasComponent<CFearful>())
             thing.AddSideFloater(Globals.Icon(IconType.Medicine));
 
         thing.RemoveComponent<CPoisoned>();

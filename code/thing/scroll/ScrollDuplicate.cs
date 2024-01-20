@@ -6,7 +6,7 @@ using System.Linq;
 namespace Roguemoji;
 public partial class ScrollDuplicate : Scroll
 {
-    public ScrollDuplicate()
+    protected override void OnAwake()
     {
         ScrollType = ScrollType.Duplicate;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;

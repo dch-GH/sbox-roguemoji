@@ -7,7 +7,7 @@ public partial class Peach : Thing
     public int EatCharisma { get; set; }
     public override string AbilityName => "Eat";
 
-    public Peach()
+    protected override void OnAwake()
     {
         DisplayIcon = "🍑";
         DisplayName = "Peach";

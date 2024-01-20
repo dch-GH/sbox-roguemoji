@@ -3,7 +3,7 @@ using System;
 
 namespace Roguemoji;
 
-public abstract class PlayerComponent
+public abstract class PlayerComponent : Component
 {
     public RoguemojiPlayer Player { get; private set; }
 

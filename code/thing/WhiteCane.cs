@@ -7,9 +7,9 @@ public partial class WhiteCane : Thing
     public int MinSightChange { get; set; }
     public Trait Trait { get; private set; }
 
-	public WhiteCane()
-	{
-		DisplayIcon = "🦯";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🦯";
         DisplayName = "White Cane";
         Description = "Useful when you can't see anything";
         Tooltip = "A white cane";

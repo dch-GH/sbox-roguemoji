@@ -6,7 +6,7 @@ namespace Roguemoji;
 public class VfxOpacityLerp : ThingComponent
 {
     public float Lifetime { get; set; }
-    public float StartOpacity{ get; set; }
+    public float StartOpacity { get; set; }
     public float EndOpacity { get; set; }
     public EasingType EasingType { get; set; }
 
@@ -20,13 +20,13 @@ public class VfxOpacityLerp : ThingComponent
         Thing.SetOpacity(StartOpacity);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         Thing.SetOpacity(Utils.Map(TimeElapsed, 0f, Lifetime, StartOpacity, EndOpacity, EasingType));
 
-        if(TimeElapsed > Lifetime)
+        if (TimeElapsed > Lifetime)
             Remove();
     }
 

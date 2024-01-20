@@ -5,7 +5,9 @@ namespace Roguemoji;
 
 public partial class Thing : Entity
 {
-	public List<ThingComponent> ThingComponents => GameObject.Components.GetAll<ThingComponent>().ToList();
+	//public List<ThingComponent> ThingComponents => GameObject.Components.GetAll<ThingComponent>().ToList();
+	public List<ThingComponent> ThingComponents = new List<ThingComponent>();
+
 	public ThingComponent AddComponent( TypeDescription type )
 	{
 		if ( type == null )
@@ -14,19 +16,24 @@ public partial class Thing : Entity
 			return null;
 		}
 
-		var component = (ThingComponent)Components.Get( type.TargetType );
+
+		Log.Info( type.TargetType );
+
+		var component = Components.Get( type.TargetType );
 		if ( component is not null )
 		{
-			component.ReInitialize();
+			var thingComponent = (ThingComponent)component;
+			thingComponent.ReInitialize();
 		}
 		else
 		{
-			component = Components.Create<ThingComponent>( type );
-			component.Init( this );
+			var c = (ThingComponent)Components.Create( type );
+			c.Init( this );
+			OnAddComponent( type );
+			return c;
 		}
 
-		OnAddComponent( type );
-		return component;
+		return null;
 	}
 
 	public T AddComponent<T>() where T : ThingComponent

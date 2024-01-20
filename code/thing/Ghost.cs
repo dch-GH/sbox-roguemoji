@@ -1,31 +1,26 @@
-﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Roguemoji;
+﻿namespace Roguemoji;
 
 public partial class Ghost : Thing
 {
     public CActing Acting { get; private set; }
 
-    // todo: make inflammable
+	// todo: make inflammable
 
-    public Ghost()
+	protected override void OnAwake()
 	{
-        ShouldUpdate = true;
+		ShouldUpdate = true;
 		DisplayName = "Ghost";
 		Tooltip = "";
-        PathfindMovementCost = 0f;
-        Flammability = 0;
+		PathfindMovementCost = 0f;
+		Flammability = 0;
 
-        if (Game.IsServer)
-        {
-            SetStartingValues();
-        }
+		if ( Game.IsServer )
+		{
+			SetStartingValues();
+		}
 	}
 
-    public override void Spawn()
+	public override void Spawn()
     {
         base.Spawn();
 

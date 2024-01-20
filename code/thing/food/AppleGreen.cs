@@ -7,7 +7,7 @@ public partial class AppleGreen : Thing
     public int EatEnergy { get; set; }
     public override string AbilityName => "Eat";
 
-    public AppleGreen()
+    protected override void OnAwake()
     {
         DisplayIcon = "🍏";
         DisplayName = "Green Apple";

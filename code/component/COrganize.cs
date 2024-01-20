@@ -33,30 +33,30 @@ public class COrganize : ThingComponent
         _orderedItems = player.InventoryGridManager.GetAllThings().Where(x => !IsInHotbar(x)).OrderBy(x => x.GetType().Name).ToList();
         _currIndex = 0;
     }
-    
+
     bool IsInHotbar(Thing thing)
     {
         return thing.GridPos.y == 0 && thing.ContainingGridManager.GetIndex(thing.GridPos) < 10;
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         var player = Thing.Brain as RoguemojiPlayer;
-        if(player == null)
+        if (player == null)
         {
             Remove();
             return;
         }
 
         Timer += dt;
-        if(Timer >= _delay)
+        if (Timer >= _delay)
         {
             if (_currIndex < _orderedItems.Count)
             {
                 var thing = _orderedItems.ElementAt(_currIndex);
-                if(thing != null && thing.ContainingGridType == GridType.Inventory && thing.ContainingGridManager.OwningPlayer == player) 
+                if (thing != null && thing.ContainingGridType == GridType.Inventory && thing.ContainingGridManager.OwningPlayer == player)
                 {
                     thing.AddFloater("📥️", time: 0.5f, new Vector2(0f, 0f), new Vector2(0, -10f), height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: false, EasingType.QuadOut, fadeInTime: 0.01f, scale: 1f, opacity: 1f);
 
@@ -81,7 +81,7 @@ public class COrganize : ThingComponent
     {
         if (Thing.Brain is RoguemojiPlayer player)
             player.ClearQueuedAction();
-            
+
         if (Thing.GetComponent<CActing>(out var component))
             ((CActing)component).AllowAction();
 

@@ -4,9 +4,9 @@ using System;
 namespace Roguemoji;
 public partial class Leaf : Thing
 {
-	public Leaf()
-	{
-		DisplayIcon = "🍂";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🍂";
         DisplayName = "Leaves";
         Description = "Small pile of dry leaves";
         Tooltip = "A pile of leaves";
@@ -38,7 +38,7 @@ public partial class Leaf : Thing
     {
         base.OnMovedOntoBy(thing);
 
-        if(thing.HasFlag(ThingFlags.Solid))
+        if (thing.HasFlag(ThingFlags.Solid))
         {
             thing.ContainingGridManager.PlaySfx("footstep_dry_leaves", GridPos, sourceThing: thing, loudness: 2);
         }

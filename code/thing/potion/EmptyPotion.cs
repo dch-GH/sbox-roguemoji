@@ -9,7 +9,7 @@ public partial class EmptyPotion : Thing
 {
     public override string AbilityName => "Fill Potion";
 
-    public EmptyPotion()
+    protected override void OnAwake()
     {
         DisplayIcon = "🧉";
         IconDepth = (int)IconDepthLevel.Normal;
@@ -30,13 +30,13 @@ public partial class EmptyPotion : Thing
         base.Use(user, gridType, targetGridPos);
 
         var thing = user.ContainingGridManager.GetThingsAt(targetGridPos).WithAll(ThingFlags.Puddle).OrderByDescending(x => x.GetZPos()).FirstOrDefault();
-        if(thing != null)
+        if (thing != null)
         {
             var puddle = thing as Puddle;
-            if(puddle != null)
+            if (puddle != null)
             {
                 Thing newPotion = null;
-                switch(puddle.LiquidType)
+                switch (puddle.LiquidType)
                 {
                     case PotionType.Water: newPotion = ContainingGridManager.SpawnThing<PotionWater>(GridPos); break;
                     case PotionType.Blood: newPotion = ContainingGridManager.SpawnThing<PotionBlood>(GridPos); break;
@@ -45,7 +45,7 @@ public partial class EmptyPotion : Thing
                     case PotionType.Lava: newPotion = ContainingGridManager.SpawnThing<PotionLava>(GridPos); break;
                 }
 
-                if(newPotion != null)
+                if (newPotion != null)
                 {
                     newPotion.ContainingGridManager.AddFloater("🚰", newPotion.GridPos, 1.0f, new Vector2(0, 2f), new Vector2(0, -9f), height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: false, EasingType.SineOut, fadeInTime: 0.2f);
                     user.WieldThing(newPotion);

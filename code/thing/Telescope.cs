@@ -8,9 +8,9 @@ public partial class Telescope : Thing
     public int SpeedAmount { get; private set; }
     public float CooldownTime { get; private set; }
 
-    public Telescope()
-	{
-		DisplayIcon = "🔭";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🔭";
         DisplayName = "Telescope";
         Description = "See farther but move slower";
         Tooltip = "A telescope";

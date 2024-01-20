@@ -21,11 +21,10 @@ public class CActing : ThingComponent
         NumPreventActionSources = 0;
     }
 
-    public override void Update(float dt)
-    {
-        base.Update(dt);
-
-        if(NumPreventActionSources == 0)
+	protected override void OnUpdate()
+	{
+		var dt = Time.Delta;
+		if (NumPreventActionSources == 0)
         {
             ActionTimer += dt;
 

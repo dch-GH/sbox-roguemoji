@@ -8,9 +8,9 @@ public partial class PuddleLava : Puddle
     public float FloaterDelayMin { get; set; }
     public float FloaterDelayMax { get; set; }
 
-	public PuddleLava()
-	{
-		DisplayIcon = "🟠";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🟠";
         DisplayName = "Puddle of Lava";
         Description = "The ground is covered with burning lava";
         Tooltip = "A puddle of lava";
@@ -34,7 +34,7 @@ public partial class PuddleLava : Puddle
 
         _elapsedTime += dt;
 
-        if(_iconState == 0 && _elapsedTime > 0.3f)
+        if (_iconState == 0 && _elapsedTime > 0.3f)
         {
             _iconState++;
             DisplayIcon = "🟧";

@@ -29,12 +29,12 @@ public class CSpeedIncrease : ThingComponent
             IconId = ((CIconPriority)component).AddIconPriority("😆", (int)PlayerIconPriority.SpeedIncrease);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         TimeElapsed += dt;
-        if(Lifetime > 0f && TimeElapsed > Lifetime)
+        if (Lifetime > 0f && TimeElapsed > Lifetime)
         {
             Remove();
             return;

@@ -7,7 +7,7 @@ public partial class Pear : Thing
     public int EatHealth { get; set; }
     public override string AbilityName => "Eat";
 
-    public Pear()
+    protected override void OnAwake()
     {
         DisplayIcon = "🍐";
         DisplayName = "Pear";

@@ -30,12 +30,12 @@ public class CSleeping : ThingComponent
         thing.AddFloater(Globals.Icon(IconType.Sleeping), time: 0f, new Vector2(15f, -10f), Vector2.Zero, height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: false, EasingType.Linear, fadeInTime: 0.025f, scale: 0.5f, opacity: 0.66f);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         TimeElapsed += dt;
-        if(Lifetime > 0f && TimeElapsed > Lifetime)
+        if (Lifetime > 0f && TimeElapsed > Lifetime)
         {
             Remove();
             return;
@@ -50,7 +50,7 @@ public class CSleeping : ThingComponent
 
         if (Thing.Brain is RoguemojiPlayer player)
             player.ClearQueuedAction();
-            
+
         if (Thing.GetComponent<CActing>(out var component))
             ((CActing)component).AllowAction();
 
@@ -72,7 +72,7 @@ public class CSleeping : ThingComponent
 
     public override void OnBumpedIntoBy(Thing thing, Direction direction)
     {
-        if(TimeElapsed > 0f)
+        if (TimeElapsed > 0f)
             Remove();
     }
 }

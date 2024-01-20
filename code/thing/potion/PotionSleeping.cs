@@ -8,7 +8,7 @@ public partial class PotionSleeping : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Sleeping);
 
-    public PotionSleeping()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Sleeping;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionSleeping : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Puts drinker to sleep";
         Tooltip = "A sleeping potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Sleeping));
 
         if (Game.IsServer)

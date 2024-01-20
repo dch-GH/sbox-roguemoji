@@ -6,9 +6,9 @@ public partial class ProjectileCigaretteSmoke : Thing
 {
     public Direction Direction { get; set; }
 
-	public ProjectileCigaretteSmoke()
-	{
-		DisplayIcon = "💨";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "💨";
         DisplayName = "Cigarette Smoke";
         Description = "";
         Tooltip = "";
@@ -40,7 +40,7 @@ public partial class ProjectileCigaretteSmoke : Thing
     {
         base.OnRemoveComponent(type);
 
-        if(type == TypeLibrary.GetType(typeof(CProjectile)))
+        if (type == TypeLibrary.GetType(typeof(CProjectile)))
             Destroy();
     }
 }

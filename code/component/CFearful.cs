@@ -25,13 +25,13 @@ public class CFearful : ThingComponent
         thing.AddFloater("💧", time: 0f, new Vector2(10f, -10f), Vector2.Zero, height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: false, EasingType.Linear, fadeInTime: 0.025f, scale: 0.65f);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         TimeElapsed += dt;
 
-        if(Lifetime > 0f && TimeElapsed > Lifetime)
+        if (Lifetime > 0f && TimeElapsed > Lifetime)
             Remove();
 
         Trait.BarPercent = 1f - Utils.Map(TimeElapsed, 0f, Lifetime, 0f, 1f);

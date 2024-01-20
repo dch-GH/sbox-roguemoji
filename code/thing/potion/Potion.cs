@@ -5,10 +5,13 @@ using System.Linq;
 
 namespace Roguemoji;
 
-public enum PotionType {
-    /* unknown: */ Health, Mana, Energy, Poison, Blindness, Sleeping, Confusion, Hallucination, Speed, Medicine, Mutation, Invisibility, Amnesia,
-    /* starts identified: */ Water, Lava, Blood, Mud, Oil, Piss, ToxicSludge, Snow, Purple 
-} 
+public enum PotionType
+{
+    /* unknown: */
+    Health, Mana, Energy, Poison, Blindness, Sleeping, Confusion, Hallucination, Speed, Medicine, Mutation, Invisibility, Amnesia,
+    /* starts identified: */
+    Water, Lava, Blood, Mud, Oil, Piss, ToxicSludge, Snow, Purple
+}
 
 public partial class Potion : Thing
 {
@@ -17,7 +20,7 @@ public partial class Potion : Thing
     public override string AbilityName => "Quaff Potion";
     public virtual string SplashIcon => "";
 
-    public Potion()
+    protected override void OnAwake()
     {
         DisplayIcon = "🧉";
         IconDepth = (int)IconDepthLevel.Normal;
@@ -32,7 +35,7 @@ public partial class Potion : Thing
 
     public static string GetDisplayName(PotionType potionType)
     {
-        switch(potionType)
+        switch (potionType)
         {
             case PotionType.Energy: return "Energy Potion";
             case PotionType.Health: return "Health Potion";

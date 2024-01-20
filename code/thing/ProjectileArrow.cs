@@ -6,9 +6,9 @@ public partial class ProjectileArrow : Thing
 {
     public Direction Direction { get; set; }
 
-	public ProjectileArrow()
-	{
-		DisplayIcon = "🔰";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🔰";
         DisplayName = "Arrow";
         Description = "";
         Tooltip = "";
@@ -37,7 +37,7 @@ public partial class ProjectileArrow : Thing
     {
         base.OnRemoveComponent(type);
 
-        if(type == TypeLibrary.GetType(typeof(CProjectile)))
+        if (type == TypeLibrary.GetType(typeof(CProjectile)))
             Destroy();
     }
 }

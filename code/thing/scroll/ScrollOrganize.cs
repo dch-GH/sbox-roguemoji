@@ -6,8 +6,8 @@ using System.Linq;
 namespace Roguemoji;
 public partial class ScrollOrganize : Scroll
 {
-    public ScrollOrganize()
-	{
+    protected override void OnAwake()
+    {
         ScrollType = ScrollType.Organize;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 

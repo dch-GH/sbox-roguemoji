@@ -9,7 +9,7 @@ public partial class PotionAmnesia : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Amnesia);
 
-    public PotionAmnesia()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Amnesia;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -17,7 +17,7 @@ public partial class PotionAmnesia : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Forget knowledge of places and things";
         Tooltip = "An amnesia potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Amnesia));
 
         if (Game.IsServer)
@@ -44,7 +44,7 @@ public partial class PotionAmnesia : Potion
         if (thing.Brain is RoguemojiPlayer player)
         {
             player.ResetScrollKnowledge();
-            player.ResetPotionKnowledge(); 
+            player.ResetPotionKnowledge();
             player.ClearVisionKnowledgeClient();
         }
 

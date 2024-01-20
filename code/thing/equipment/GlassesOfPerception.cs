@@ -7,9 +7,9 @@ public partial class GlassesOfPerception : Thing
     public int Range { get; set; }
     public int IconId { get; set; }
 
-    public GlassesOfPerception()
-	{
-		DisplayIcon = "👓️";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "👓️";
         DisplayName = "Glasses of Perception";
         Description = "Allows you to see invisible things";
         Tooltip = "Glasses of Perception";
@@ -36,7 +36,7 @@ public partial class GlassesOfPerception : Thing
         else
             thing.AdjustStat(StatType.Perception, Range);
 
-        if(thing is Smiley smiley)
+        if (thing is Smiley smiley)
         {
             if (thing.GetComponent<CIconPriority>(out var component))
             {

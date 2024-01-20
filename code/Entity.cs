@@ -11,7 +11,6 @@ public class Entity : Sandbox.Component
 	public virtual void OnClientActive( IClient client ) { }
 	public virtual void Simulate( IClient client ) { }
 
-	//public virtual void Update( float dt ) { }
 	public virtual void Delete() { }
 
 	public Guid NetworkIdent => GameObject.Id;

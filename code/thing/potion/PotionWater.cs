@@ -8,7 +8,7 @@ public partial class PotionWater : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Water);
 
-    public PotionWater()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Water;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionWater : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Fresh clean water";
         Tooltip = "A water potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Water));
 
         if (Game.IsServer)

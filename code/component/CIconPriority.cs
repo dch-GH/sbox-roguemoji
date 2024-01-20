@@ -35,9 +35,9 @@ public class CIconPriority : ThingComponent
         ShouldUpdate = true;
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         bool dirty = false;
         for (int i = IconPriorities.Count - 1; i >= 0; i--)
@@ -84,7 +84,7 @@ public class CIconPriority : ThingComponent
 
     public bool RemoveIconPriority(int index)
     {
-        if(IconPriorities.ContainsKey(index))
+        if (IconPriorities.ContainsKey(index))
         {
             IconPriorities.Remove(index);
             RefreshIcon();
@@ -97,7 +97,7 @@ public class CIconPriority : ThingComponent
     public void SetDefaultIcon(string icon)
     {
         _defaultIcon = icon;
-        RefreshIcon(); 
+        RefreshIcon();
     }
 
     public void RefreshIcon()
@@ -105,10 +105,10 @@ public class CIconPriority : ThingComponent
         string icon = _defaultIcon;
         int highestPriority = -1;
 
-        foreach(var pair in IconPriorities)
+        foreach (var pair in IconPriorities)
         {
             var data = pair.Value;
-            if(data.priority > highestPriority)
+            if (data.priority > highestPriority)
             {
                 icon = data.icon;
                 highestPriority = data.priority;

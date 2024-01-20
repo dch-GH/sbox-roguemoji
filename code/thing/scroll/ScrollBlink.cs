@@ -6,8 +6,8 @@ using System.Linq;
 namespace Roguemoji;
 public partial class ScrollBlink : Scroll
 {
-    public ScrollBlink()
-	{
+    protected override void OnAwake()
+    {
         ScrollType = ScrollType.Blink;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
 

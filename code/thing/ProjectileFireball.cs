@@ -7,9 +7,9 @@ public partial class ProjectileFireball : Thing
 {
     public int ExplosionDamage { get; set; }
 
-	public ProjectileFireball()
-	{
-		DisplayIcon = Globals.Icon(IconType.Fire);
+    protected override void OnAwake()
+    {
+        DisplayIcon = Globals.Icon(IconType.Fire);
         DisplayName = "Fireball";
         Description = "";
         Tooltip = "";
@@ -64,7 +64,7 @@ public partial class ProjectileFireball : Thing
                     {
                         var thing = things[i];
 
-                        if(!ContainingGridManager.ShouldCellPutOutFire(gridPos))
+                        if (!ContainingGridManager.ShouldCellPutOutFire(gridPos))
                             thing.AddComponent<CBurning>();
 
                         if (thing.HasStat(StatType.Health))

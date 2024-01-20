@@ -12,7 +12,7 @@ public partial class Scroll : Thing
     public override string AbilityName => "Read Scroll";
     public override string ChatDisplayIcons => GetChatDisplayIcons(ScrollType);
 
-    public Scroll()
+    protected override void OnAwake()
     {
         DisplayIcon = "📜";
         IconDepth = (int)IconDepthLevel.Normal;
@@ -183,7 +183,7 @@ public partial class Scroll : Thing
         HashSet<IntVector> aimingCells = new HashSet<IntVector>();
 
         var player = thingWieldingThis.Brain as RoguemojiPlayer;
-        if(player == null)
+        if (player == null)
             return aimingCells;
 
         var gridManager = player.InventoryGridManager;

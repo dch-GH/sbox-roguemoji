@@ -15,9 +15,9 @@ public partial class Firecracker : Thing
 
     public override string ChatDisplayIcons => $"🧨{(IsLit ? Globals.Icon(IconType.Fire) : "")}";
 
-    public Firecracker()
-	{
-		DisplayIcon = "🧨";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🧨";
         DisplayName = "Firecracker";
         Description = "Stuns anyone who sees it explode";
         Tooltip = "A firecracker";
@@ -47,7 +47,7 @@ public partial class Firecracker : Thing
         AddComponent<CBurning>();
 
         ShouldUpdate = true;
-        
+
         base.Use(user);
     }
 
@@ -55,7 +55,7 @@ public partial class Firecracker : Thing
     {
         base.Update(dt);
 
-        if(IsLit && !IsRemoved)
+        if (IsLit && !IsRemoved)
         {
             _fuseSfxTimer += dt;
             if (_fuseSfxTimer > FUSE_SFX_DELAY)
@@ -78,7 +78,7 @@ public partial class Firecracker : Thing
 
     public override void OnDestroyed()
     {
-        if(HasComponent<CBurning>())
+        if (HasComponent<CBurning>())
         {
             PlaySfx("firecracker_explode", loudness: 9, volume: 2f, noFalloff: true);
             ContainingGridManager.AddFloater(Globals.Icon(IconType.Explosion), GridPos, 1f, new Vector2(0f, 0f), new Vector2(0f, -4f), height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: false, EasingType.Linear, fadeInTime: 0.01f, scale: 1.3f, opacity: 0.6f, shakeAmount: 0f);

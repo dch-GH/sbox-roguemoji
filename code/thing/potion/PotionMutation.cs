@@ -9,7 +9,7 @@ public partial class PotionMutation : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Mutation);
 
-    public PotionMutation()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Mutation;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -17,7 +17,7 @@ public partial class PotionMutation : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Causes unpredictable changes";
         Tooltip = "A mutation potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Mutation));
 
         if (Game.IsServer)
@@ -46,14 +46,14 @@ public partial class PotionMutation : Potion
 
         var possibleMutations = GetPossibleMutations();
 
-        for(int i = possibleMutations.Count - 1; i >= 0; i--)
+        for (int i = possibleMutations.Count - 1; i >= 0; i--)
         {
             var mutationType = possibleMutations[i];
-            if(thing.HasComponent(mutationType))
+            if (thing.HasComponent(mutationType))
                 possibleMutations.RemoveAt(i);
         }
 
-        if(possibleMutations.Count > 0)
+        if (possibleMutations.Count > 0)
         {
             var selectedType = possibleMutations[Game.Random.Int(0, possibleMutations.Count - 1)];
             thing.AddComponent(selectedType);
@@ -64,7 +64,7 @@ public partial class PotionMutation : Potion
 
     List<TypeDescription> GetPossibleMutations()
     {
-        return new List<TypeDescription>() { 
+        return new List<TypeDescription>() {
             TypeLibrary.GetType(typeof(MTeleportitis)),
             TypeLibrary.GetType(typeof(MSeeInvisible)),
             TypeLibrary.GetType(typeof(MPoisonSpeed)),

@@ -9,7 +9,7 @@ public partial class PotionEnergy : Potion
     public override string SplashIcon => GetStatIcon(StatType.Energy);
     public int EnergyAmount { get; private set; }
 
-    public PotionEnergy()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Energy;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;

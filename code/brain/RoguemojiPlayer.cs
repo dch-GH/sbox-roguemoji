@@ -42,8 +42,6 @@ public partial class RoguemojiPlayer : ThingBrain
 
 	protected override void OnAwake()
 	{
-		Log.Error( "ajhawdhuwaldjhwadhawkljhdawhld" );
-
 		var gridManagerGO = RoguemojiGame.SpawnGameObject();
 		InventoryGridManager = gridManagerGO.Components.Create<GridManager>();
 
@@ -97,9 +95,10 @@ public partial class RoguemojiPlayer : ThingBrain
 
 		EquipmentGridManager.Restart();
 
-		for ( int x = 0; x < RoguemojiGame.InventoryWidth; x++ )
-			for ( int y = 0; y < RoguemojiGame.InventoryHeight; y++ )
-				SpawnRandomInventoryThing( new IntVector( x, y ) );
+		// TODO: SPAWN RANDOM THING
+		//for ( int x = 0; x < RoguemojiGame.InventoryWidth; x++ )
+		//	for ( int y = 0; y < RoguemojiGame.InventoryHeight; y++ )
+		//		SpawnRandomInventoryThing( new IntVector( x, y ) );
 
 		RoguemojiGame.Instance.RefreshGridPanelClient( To.Single( this ), GridType.Inventory );
 		RoguemojiGame.Instance.RefreshGridPanelClient( To.Single( this ), GridType.Equipment );

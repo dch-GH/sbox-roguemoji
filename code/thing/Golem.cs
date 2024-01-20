@@ -7,9 +7,9 @@ public partial class Golem : Thing
     public CTargeting Targeting { get; private set; }
     public CActing Acting { get; private set; }
 
-    public Golem()
-	{
-		DisplayIcon = "🗿";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🗿";
         DisplayName = "Golem";
         Description = "Living rock that moves with mindless intent";
         Tooltip = "A golem";

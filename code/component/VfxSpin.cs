@@ -19,11 +19,10 @@ public class VfxSpin : ThingComponent
         Thing.SetRotation(StartAngle);
     }
 
-    public override void Update(float dt)
-    {
-        base.Update(dt);
+	protected override void OnUpdate()
+	{
 
-        Thing.SetRotation(Utils.Map(TimeElapsed, 0f, Lifetime, StartAngle, EndAngle, EasingType.QuadOut));
+		Thing.SetRotation(Utils.Map(TimeElapsed, 0f, Lifetime, StartAngle, EndAngle, EasingType.QuadOut));
 
         if (TimeElapsed > Lifetime)
             Remove();

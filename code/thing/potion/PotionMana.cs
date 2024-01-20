@@ -9,7 +9,7 @@ public partial class PotionMana : Potion
     public override string SplashIcon => GetStatIcon(StatType.Mana);
     public int ManaAmount { get; private set; }
 
-    public PotionMana()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Mana;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;

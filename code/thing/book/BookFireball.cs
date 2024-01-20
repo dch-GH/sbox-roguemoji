@@ -12,7 +12,7 @@ public partial class BookFireball : Book
 
     public override string ChatDisplayIcons => $"📘{Globals.Icon(IconType.Fire)}";
 
-    public BookFireball()
+    protected override void OnAwake()
     {
         SpellName = "Fireball";
         DisplayName = $"Book of {SpellName}";
@@ -56,9 +56,9 @@ public partial class BookFireball : Book
         }
 
         var mana = user.GetStatClamped(StatType.Mana);
-        if(mana < ManaCost && !ignoreResources)
+        if (mana < ManaCost && !ignoreResources)
         {
-            if(shouldLogMessage && user.Brain is RoguemojiPlayer player)
+            if (shouldLogMessage && user.Brain is RoguemojiPlayer player)
                 RoguemojiGame.Instance.LogPersonalMessage(player, $"You need {ManaCost}{GetStatIcon(StatType.Mana)} to use {ChatDisplayIcons} but you only have {mana}{GetStatIcon(StatType.Mana)}");
 
             return false;

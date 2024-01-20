@@ -8,7 +8,7 @@ public partial class PotionInvisible : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Invisible);
 
-    public PotionInvisible()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Invisibility;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionInvisible : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Makes things temporarily invisible";
         Tooltip = "An invisibility potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Invisible));
 
         if (Game.IsServer)

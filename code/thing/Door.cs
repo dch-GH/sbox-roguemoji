@@ -4,9 +4,9 @@ using System;
 namespace Roguemoji;
 public partial class Door : Thing
 {
-	public Door()
-	{
-		DisplayIcon = "️🚪";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "️🚪";
         DisplayName = "Door";
         IconDepth = (int)IconDepthLevel.Solid;
         Tooltip = "A door";

@@ -4,9 +4,9 @@ using System;
 namespace Roguemoji;
 public partial class PuddleMud : Puddle
 {
-	public PuddleMud()
-	{
-		DisplayIcon = "🟤";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🟤";
         DisplayName = "Puddle of Mud";
         Description = "The ground is covered with sticky mud";
         Tooltip = "A puddle of mud";
@@ -24,7 +24,7 @@ public partial class PuddleMud : Puddle
 
         _elapsedTime += dt;
 
-        if(_iconState == 0 && _elapsedTime > 0.3f)
+        if (_iconState == 0 && _elapsedTime > 0.3f)
         {
             _iconState++;
             DisplayIcon = "🟫";

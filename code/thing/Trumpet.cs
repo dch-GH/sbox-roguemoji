@@ -9,9 +9,9 @@ public partial class Trumpet : Thing
 
     public override string AbilityName => "Blow Trumpet";
 
-    public Trumpet()
-	{
-		DisplayIcon = "🎺";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🎺";
         DisplayName = "Trumpet";
         Description = "Loud and annoying";
         Tooltip = "A trumpet";

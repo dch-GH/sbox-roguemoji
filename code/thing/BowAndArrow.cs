@@ -11,9 +11,9 @@ public partial class BowAndArrow : Thing
 
     public override string AbilityName => "Shoot Arrow";
 
-    public BowAndArrow()
-	{
-		DisplayIcon = "🏹";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🏹";
         DisplayName = "Longbow";
         Description = "Shoots arrows";
         Tooltip = "A longbow";

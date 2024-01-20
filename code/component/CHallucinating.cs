@@ -28,12 +28,12 @@ public class CHallucinating : ThingComponent
         thing.AddFloater(Globals.Icon(IconType.Hallucination), time: 0f, new Vector2(-14f, 4f), Vector2.Zero, height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: false, EasingType.Linear, fadeInTime: 0.025f, scale: 0.5f, opacity: 0.25f);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         TimeElapsed += dt;
-        if(Lifetime > 0f && TimeElapsed > Lifetime)
+        if (Lifetime > 0f && TimeElapsed > Lifetime)
         {
             Remove();
             return;

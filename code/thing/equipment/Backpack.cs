@@ -4,14 +4,14 @@ using System;
 namespace Roguemoji;
 public partial class Backpack : Thing
 {
-    public Backpack()
-	{
-		DisplayIcon = "🎒";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🎒";
         DisplayName = "Backpack";
         Description = "Increases your inventory size";
         IconDepth = (int)IconDepthLevel.Normal;
         Tooltip = "A backpack";
-		ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Equipment;
         Flammability = 20;
     }
 
@@ -19,7 +19,7 @@ public partial class Backpack : Thing
     {
         base.OnEquippedTo(thing);
 
-        if(thing.Brain is RoguemojiPlayer player)
+        if (thing.Brain is RoguemojiPlayer player)
             player.InventoryGridManager.SetWidth(player.InventoryGridManager.GridWidth + 1);
     }
 

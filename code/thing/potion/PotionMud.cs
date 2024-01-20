@@ -8,7 +8,7 @@ public partial class PotionMud : Potion
 {
     public override string SplashIcon => "🟤";
 
-    public PotionMud()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Mud;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionMud : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Sticky wet mud";
         Tooltip = "A mud potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Mud));
 
         if (Game.IsServer)

@@ -7,9 +7,9 @@ public partial class ProjectileTidalWave : Thing
 {
     public int SlamDamage { get; set; }
 
-	public ProjectileTidalWave()
-	{
-		DisplayIcon = Globals.Icon(IconType.Wave);
+    protected override void OnAwake()
+    {
+        DisplayIcon = Globals.Icon(IconType.Wave);
         DisplayName = "Wave";
         Description = "";
         Tooltip = "";
@@ -22,9 +22,9 @@ public partial class ProjectileTidalWave : Thing
     {
         base.OnMovedOntoThing(thing);
 
-        if(!LastGridPos.Equals(GridPos) && !thing.HasFlag(ThingFlags.CantBePushed))
+        if (!LastGridPos.Equals(GridPos) && !thing.HasFlag(ThingFlags.CantBePushed))
         {
-            if(!thing.TryMove(GridManager.GetDirectionForIntVector(GridPos - LastGridPos), out bool switchedLevel, out bool actionWasntReady, dontRequireAction: true))
+            if (!thing.TryMove(GridManager.GetDirectionForIntVector(GridPos - LastGridPos), out bool switchedLevel, out bool actionWasntReady, dontRequireAction: true))
                 thing.Hurt(SlamDamage);
         }
     }
@@ -57,7 +57,7 @@ public partial class ProjectileTidalWave : Thing
     public void PushStartPosThings(IntVector gridDir)
     {
         var things = ContainingGridManager.GetThingsAt(GridPos).WithNone(ThingFlags.CantBePushed).Where(x => x != this).ToList();
-        foreach(var thing in things)
+        foreach (var thing in things)
         {
             if (!thing.TryMove(GridManager.GetDirectionForIntVector(gridDir), out bool switchedLevel, out bool actionWasntReady, dontRequireAction: true))
                 thing.Hurt(SlamDamage);

@@ -6,7 +6,7 @@ public partial class TreeEvergreen : Thing
 {
     public int HealthAmount { get; set; }
 
-    public TreeEvergreen()
+    protected override void OnAwake()
     {
         DisplayIcon = "🌲";
         DisplayName = "Tree";

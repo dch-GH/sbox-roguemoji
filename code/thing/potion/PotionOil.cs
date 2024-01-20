@@ -8,7 +8,7 @@ public partial class PotionOil : Potion
 {
     public override string SplashIcon => "⚫️";
 
-    public PotionOil()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Oil;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionOil : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Flammable oil";
         Tooltip = "An oil potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Oil));
 
         if (Game.IsServer)

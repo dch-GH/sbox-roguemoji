@@ -8,9 +8,9 @@ public partial class SafetyVest : Thing
 
     // todo: resist fire
 
-    public SafetyVest()
-	{
-		DisplayIcon = "🦺";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🦺";
         DisplayName = "Safety Vest";
         Description = "Highly visible";
         Tooltip = "A safety vest";

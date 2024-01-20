@@ -12,8 +12,8 @@ public partial class BookTeleport : Book
 
     public override string ChatDisplayIcons => $"📘{Globals.Icon(IconType.Teleport)}";
 
-    public BookTeleport()
-	{
+    protected override void OnAwake()
+    {
         SpellName = "Teleport";
         DisplayName = $"Book of {SpellName}";
         Description = $"Teleport to a random place on the current floor";
@@ -54,7 +54,7 @@ public partial class BookTeleport : Book
         }
 
         var mana = user.GetStatClamped(StatType.Mana);
-        if(mana < ManaCost && !ignoreResources)
+        if (mana < ManaCost && !ignoreResources)
         {
             if (shouldLogMessage && user.Brain is RoguemojiPlayer player)
                 RoguemojiGame.Instance.LogPersonalMessage(player, $"You need {ManaCost}{GetStatIcon(StatType.Mana)} to use {ChatDisplayIcons} but you only have {mana}{GetStatIcon(StatType.Mana)}");
@@ -70,7 +70,7 @@ public partial class BookTeleport : Book
         if (!user.TrySpendStat(StatType.Mana, ManaCost))
             return;
 
-        if(ScrollTeleport.TeleportThing(user))
+        if (ScrollTeleport.TeleportThing(user))
         {
             StartCooldown(CooldownTime);
             base.Use(user);

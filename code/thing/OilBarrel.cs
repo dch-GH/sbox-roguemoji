@@ -1,34 +1,30 @@
 ﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Roguemoji;
+
 public partial class OilBarrel : Thing
 {
     public int RemainingOilAmount { get; set; }
 
-    // todo: barrel explodes with fiery oil puddles if ignited
+	// todo: barrel explodes with fiery oil puddles if ignited
 
-	public OilBarrel()
+	protected override void OnAwake()
 	{
 		DisplayIcon = "️🛢";
-        DisplayName = "Oil Barrel";
-        Description = "An open barrel of flammable oil";
-        Tooltip = "A barrel of oil";
-        IconDepth = (int)IconDepthLevel.Solid;
-        ThingFlags = ThingFlags.Solid | ThingFlags.Selectable;
-        PathfindMovementCost = 20f;
-        Flammability = 9;
-        RemainingOilAmount = 4;
+		DisplayName = "Oil Barrel";
+		Description = "An open barrel of flammable oil";
+		Tooltip = "A barrel of oil";
+		IconDepth = (int)IconDepthLevel.Solid;
+		ThingFlags = ThingFlags.Solid | ThingFlags.Selectable;
+		PathfindMovementCost = 20f;
+		Flammability = 9;
+		RemainingOilAmount = 4;
 
-        if (Game.IsServer)
-        {
-            InitStat(StatType.SightBlockAmount, 9);
-        }
-
-        //SetTattoo("⚫️", scale: 0.475f, offset: new Vector2(-0.858505f, 2f), offsetWielded: new Vector2(-1.5f, 6f), offsetInfo: new Vector2(-3.5f, 16f), offsetCharWielded: new Vector2(0f, 8f), offsetInfoWielded: new Vector2(-4.75f, 6.25f));
-    }
+		if ( Game.IsServer )
+		{
+			InitStat( StatType.SightBlockAmount, 9 );
+		}
+	}
 
     public override void OnBumpedIntoBy(Thing thing, Direction direction)
     {

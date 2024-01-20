@@ -8,9 +8,9 @@ public partial class Refreshment : Thing
 {
     public override string AbilityName => "Drink";
 
-    public Refreshment()
-	{
-		DisplayIcon = "🥤";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🥤";
         DisplayName = "Refreshment";
         Description = "Refreshes your item cooldowns";
         Tooltip = "A refreshment";
@@ -19,7 +19,7 @@ public partial class Refreshment : Thing
         Flammability = 13;
 
         if (Game.IsServer)
-        {   
+        {
             AddTrait(AbilityName, "😋", $"Consume refreshment to refresh all item cooldowns", offset: new Vector2(0f, -1f), tattooIcon: "🥤", tattooScale: 0.5f, tattooOffset: new Vector2(-8f, 8f), isAbility: true);
         }
     }
@@ -28,9 +28,9 @@ public partial class Refreshment : Thing
     {
         Destroy();
 
-        if(user.Brain is RoguemojiPlayer player)
+        if (user.Brain is RoguemojiPlayer player)
         {
-            foreach(var thing in player.InventoryGridManager.GetAllThings())
+            foreach (var thing in player.InventoryGridManager.GetAllThings())
             {
                 if (thing.IsOnCooldown)
                     thing.FinishCooldown();

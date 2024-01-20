@@ -11,9 +11,9 @@ public partial class Juicebox : Thing
     public int DurabilityAmount { get; private set; }
     public int DurabilityCost { get; private set; }
 
-    public Juicebox()
-	{
-		DisplayIcon = "🧃";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🧃";
         DisplayName = "Juicebox";
         Description = "Heals each time you sip";
         Tooltip = "A juicebox";
@@ -22,7 +22,7 @@ public partial class Juicebox : Thing
         Flammability = 16;
 
         if (Game.IsServer)
-        {   
+        {
             HealthAmount = 1;
             DurabilityAmount = 3;
             DurabilityCost = 1;

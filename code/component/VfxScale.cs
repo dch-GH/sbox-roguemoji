@@ -19,13 +19,13 @@ public class VfxScale : ThingComponent
         Thing.SetScale(StartScale);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         Thing.SetScale(Utils.Map(TimeElapsed, 0f, Lifetime, StartScale, EndScale, EasingType.Linear));
 
-        if(TimeElapsed > Lifetime)
+        if (TimeElapsed > Lifetime)
             Remove();
     }
 

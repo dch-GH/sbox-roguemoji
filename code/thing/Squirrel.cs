@@ -7,15 +7,15 @@ public partial class Squirrel : Thing
     public CTargeting Targeting { get; private set; }
     public CActing Acting { get; private set; }
 
-    public Squirrel()
-	{
-		DisplayIcon = "🐿";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🐿";
         DisplayName = "Squirrel";
         Description = "A bushy-tailed rodent";
         IconDepth = (int)IconDepthLevel.Solid;
         ShouldUpdate = true;
-		Tooltip = "A squirrel";
-		ThingFlags = ThingFlags.Solid | ThingFlags.Selectable | ThingFlags.CanWieldThings | ThingFlags.CanGainMutations;
+        Tooltip = "A squirrel";
+        ThingFlags = ThingFlags.Solid | ThingFlags.Selectable | ThingFlags.CanWieldThings | ThingFlags.CanGainMutations;
         PathfindMovementCost = 5f;
         Faction = FactionType.Enemy;
         Flammability = 13;
@@ -61,7 +61,7 @@ public partial class Squirrel : Thing
     protected override void OnDestroy()
     {
         // todo: dont spawn blood if burned to death
-        if(!ContainingGridManager.DoesGridPosContainThingType<PuddleBlood>(GridPos))
+        if (!ContainingGridManager.DoesGridPosContainThingType<PuddleBlood>(GridPos))
         {
             ContainingGridManager.RemovePuddles(GridPos, fadeOut: true);
             ContainingGridManager.SpawnThing<PuddleBlood>(GridPos);
@@ -70,6 +70,6 @@ public partial class Squirrel : Thing
         if (Game.Random.Float(0f, 1f) < 0.5f)
             ContainingGridManager.SpawnThing<Bone>(GridPos);
 
-		base.OnDestroy();
+        base.OnDestroy();
     }
 }

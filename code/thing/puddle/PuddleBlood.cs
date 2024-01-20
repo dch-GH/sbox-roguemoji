@@ -4,9 +4,9 @@ using System;
 namespace Roguemoji;
 public partial class PuddleBlood : Puddle
 {
-	public PuddleBlood()
-	{
-		DisplayIcon = "🩸";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🩸";
         DisplayName = "Puddle of Blood";
         Description = "The ground is covered in a layer of blood";
         Tooltip = "A puddle of blood";
@@ -24,13 +24,13 @@ public partial class PuddleBlood : Puddle
 
         _elapsedTime += dt;
 
-        if(_iconState == 0 && _elapsedTime > 0.25f)
+        if (_iconState == 0 && _elapsedTime > 0.25f)
         {
             _iconState++;
             DisplayIcon = "🔴";
             IconDepth = (int)IconDepthLevel.Puddle;
         }
-        else if(_iconState == 1 && _elapsedTime > 0.4f)
+        else if (_iconState == 1 && _elapsedTime > 0.4f)
         {
             _iconState++;
             DisplayIcon = "🟥";

@@ -4,8 +4,8 @@ using System;
 namespace Roguemoji;
 public partial class Hole : Thing
 {
-	public Hole()
-	{
+    protected override void OnAwake()
+    {
         DisplayIcon = "️🕳";
         DisplayName = "Hole";
         Description = "A deep hole leading to another area";

@@ -20,14 +20,14 @@ public class VfxNudge : ThingComponent
         Thing.SetMoveOffset(dir * 0f);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         var dir = GridManager.GetVectorForDirection(Direction);
         Thing.SetMoveOffset(dir * Utils.MapReturn(TimeElapsed, 0f, Lifetime, 0f, Distance, EasingType.QuadOut));
 
-        if(TimeElapsed > Lifetime)
+        if (TimeElapsed > Lifetime)
             Remove();
     }
 

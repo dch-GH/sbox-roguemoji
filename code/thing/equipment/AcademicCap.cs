@@ -6,9 +6,9 @@ public partial class AcademicCap : Thing
 {
     public int IntelligenceAmount { get; private set; }
 
-    public AcademicCap()
-	{
-		DisplayIcon = "🎓";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🎓";
         DisplayName = "Academic Cap";
         Description = "Makes you feel smarter";
         Tooltip = "An academic cap";

@@ -5,7 +5,14 @@
       "Id": "206aa9d5-5456-4c9e-9bce-1bca4b5758ea",
       "Name": "Level",
       "Position": "149.995,149.995,-212.125",
-      "Enabled": true
+      "Enabled": true,
+      "Components": [
+        {
+          "__version": 0,
+          "__type": "Level",
+          "__enabled": true
+        }
+      ]
     },
     {
       "Id": "c114dcdd-3f42-4152-87cd-de910df1f856",
@@ -18,6 +25,7 @@
           "__type": "RoguemojiGame",
           "__enabled": true,
           "_hudPrefab": "prefabs/hud.prefab",
+          "_level": "206aa9d5-5456-4c9e-9bce-1bca4b5758ea",
           "PlayerPrefab": "prefabs/player.prefab",
           "SpawnPoints": [],
           "StartServer": true

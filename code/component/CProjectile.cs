@@ -36,9 +36,9 @@ public class CProjectile : ThingComponent
         TimeSinceMove = 0f;
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         if (Thing.ContainingGridType != GridType.Arena)
         {
@@ -46,16 +46,16 @@ public class CProjectile : ThingComponent
             return;
         }
 
-        if(TimeSinceMove > MoveDelay)
+        if (TimeSinceMove > MoveDelay)
         {
             CurrentNumMoves++;
             TimeSinceMove = 0f;
 
-            if(ShouldUseDirectionVector)
+            if (ShouldUseDirectionVector)
             {
                 WorldPos += DirectionVector * RoguemojiGame.CellSize;
                 IntVector newGridPos = Thing.ContainingGridManager.GetGridPosForWorldPos(WorldPos);
-                if(!newGridPos.Equals(Thing.GridPos))
+                if (!newGridPos.Equals(Thing.GridPos))
                 {
                     var direction = GridManager.GetDirectionForIntVector(newGridPos - Thing.GridPos);
                     if (Thing.TryMove(direction, out bool switchedLevel, out bool actionWasntReady, shouldAnimate: true, dontRequireAction: true))
@@ -80,7 +80,7 @@ public class CProjectile : ThingComponent
 
     public override void OnBumpedIntoThing(Thing thing, Direction direction)
     {
-        if(TimeElapsed > 0f)
+        if (TimeElapsed > 0f)
             Remove();
     }
 
@@ -89,7 +89,7 @@ public class CProjectile : ThingComponent
         if (!ShouldHit)
             return;
 
-        if(TimeElapsed > 0f && thing.HasFlag(ThingFlags.Solid))
+        if (TimeElapsed > 0f && thing.HasFlag(ThingFlags.Solid))
             Thing.HitOther(thing, Direction);
 
         Remove();

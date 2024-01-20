@@ -28,11 +28,11 @@ public class CInvisible : ThingComponent
             IconId = ((CIconPriority)component).AddIconPriority("🤫", (int)PlayerIconPriority.Invisible);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
-        if(Lifetime > 0f)
+        if (Lifetime > 0f)
         {
             TimeElapsed += dt;
             if (TimeElapsed > Lifetime)

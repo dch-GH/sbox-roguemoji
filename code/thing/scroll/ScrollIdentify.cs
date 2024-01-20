@@ -9,8 +9,8 @@ public partial class ScrollIdentify : Scroll
 {
     public override GridType AimingGridType => GridType.Inventory;
 
-    public ScrollIdentify()
-	{
+    protected override void OnAwake()
+    {
         ScrollType = ScrollType.Identify;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
 
@@ -41,7 +41,7 @@ public partial class ScrollIdentify : Scroll
             RoguemojiGame.Instance.RevealScroll(scroll.ScrollType, user.GridPos, user.CurrentLevelId);
             scroll.AddFloater(Globals.Icon(IconType.Identified), 0.6f, new Vector2(0f, 0f), new Vector2(0, -10f), height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: false, EasingType.QuadOut, fadeInTime: 0.1f, scale: 0.8f, opacity: 1f);
         }
-        else if(item is Potion potion && !player.IsPotionTypeIdentified(potion.PotionType))
+        else if (item is Potion potion && !player.IsPotionTypeIdentified(potion.PotionType))
         {
             RoguemojiGame.Instance.RevealPotion(potion.PotionType, user.GridPos, user.CurrentLevelId);
             potion.AddFloater(Globals.Icon(IconType.Identified), 0.6f, new Vector2(0f, 0f), new Vector2(0, -10f), height: 0f, text: "", requireSight: true, alwaysShowWhenAdjacent: false, EasingType.QuadOut, fadeInTime: 0.1f, scale: 0.8f, opacity: 1f);
@@ -50,7 +50,7 @@ public partial class ScrollIdentify : Scroll
         Destroy();
     }
 
-    public override HashSet<IntVector> GetAimingTargetCellsClient() 
+    public override HashSet<IntVector> GetAimingTargetCellsClient()
     {
         Game.AssertClient();
 

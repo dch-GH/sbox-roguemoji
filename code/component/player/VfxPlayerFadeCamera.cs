@@ -16,9 +16,9 @@ public class VfxPlayerFadeCamera : PlayerComponent
         IsClientComponent = true;
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         Player.CameraFade = ShouldFadeOut
             ? Utils.Map(TimeElapsed, 0f, Lifetime, 0f, 1f, EasingType.SineInOut)

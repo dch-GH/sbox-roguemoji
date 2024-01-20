@@ -11,9 +11,9 @@ public partial class RugbyBall : Thing
 
     public override string AbilityName => "Charge";
 
-    public RugbyBall()
-	{
-		DisplayIcon = "🏉";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🏉";
         DisplayName = "Rugby Ball";
         Description = "Charge and slam into things";
         Tooltip = "A rugby ball";
@@ -121,9 +121,9 @@ public class CRugbyCharge : ThingComponent
             IconId = ((CIconPriority)component2).AddIconPriority("😤", (int)PlayerIconPriority.RugbyCharge);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         if (Thing.ContainingGridType != GridType.Arena)
         {
@@ -131,7 +131,7 @@ public class CRugbyCharge : ThingComponent
             return;
         }
 
-        if(StartTimer < StartDelay)
+        if (StartTimer < StartDelay)
         {
             StartTimer += dt;
             return;

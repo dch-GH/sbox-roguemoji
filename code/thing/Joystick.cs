@@ -10,7 +10,7 @@ public partial class Joystick : Thing
     public float CooldownTime { get; private set; }
     public override string AbilityName => "Move";
 
-    public Joystick()
+    protected override void OnAwake()
     {
         DisplayIcon = "🕹️";
         DisplayName = "Joystick";
@@ -72,7 +72,7 @@ public partial class Joystick : Thing
         base.Use(user, gridType, targetGridPos);
     }
 
-    public override HashSet<IntVector> GetAimingTargetCellsClient() 
+    public override HashSet<IntVector> GetAimingTargetCellsClient()
     {
         Game.AssertClient();
 

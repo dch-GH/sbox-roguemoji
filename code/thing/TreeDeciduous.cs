@@ -9,15 +9,15 @@ public partial class TreeDeciduous : Thing
 
     public int HealthAmount { get; set; }
 
-    public TreeDeciduous()
-	{
-		DisplayIcon = "🌳";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🌳";
         DisplayName = "Tree";
         Description = "A tall deciduous tree";
         Tooltip = "A tree";
         IconDepth = (int)IconDepthLevel.Solid;
         ThingFlags = ThingFlags.Solid | ThingFlags.Selectable | ThingFlags.CanWieldThings | ThingFlags.CantBePushed;
-		PathfindMovementCost = 99f;
+        PathfindMovementCost = 99f;
         HealthAmount = 400;
         Flammability = 17;
 
@@ -26,7 +26,7 @@ public partial class TreeDeciduous : Thing
             InitStat(StatType.SightBlockAmount, 13);
             InitStat(StatType.Health, HealthAmount, min: 0, max: HealthAmount);
         }
-        else 
+        else
         {
             WieldedThingOffset = new Vector2(9.6f, 7.2f);
             WieldedThingFontSize = 14;
@@ -39,12 +39,12 @@ public partial class TreeDeciduous : Thing
     {
         base.OnSpawned();
 
-        if(Game.Random.Float(0f, 1f) < 0.33f)
+        if (Game.Random.Float(0f, 1f) < 0.33f)
         {
             int randItemNum = Game.Random.Int(0, 11);
             Thing item = null;
 
-            switch(randItemNum)
+            switch (randItemNum)
             {
                 case 0: case 1: case 2: item = RoguemojiGame.Instance.SpawnThing<AppleRed>(CurrentLevelId); break;
                 case 3: case 4: item = RoguemojiGame.Instance.SpawnThing<AppleGreen>(CurrentLevelId); break;

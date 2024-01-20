@@ -6,8 +6,8 @@ using System.Linq;
 namespace Roguemoji;
 public partial class ScrollConfetti : Scroll
 {
-    public ScrollConfetti()
-	{
+    protected override void OnAwake()
+    {
         ScrollType = ScrollType.Confetti;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
 
@@ -22,7 +22,7 @@ public partial class ScrollConfetti : Scroll
     {
         base.Use(user);
 
-        if(user.Brain is RoguemojiPlayer player)
+        if (user.Brain is RoguemojiPlayer player)
             user.AddComponent<CConfetti>();
 
         RoguemojiGame.Instance.RevealScroll(ScrollType, user.GridPos, user.CurrentLevelId);

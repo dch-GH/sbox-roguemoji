@@ -1,7 +1,4 @@
-﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 
 namespace Roguemoji;
 
@@ -33,18 +30,20 @@ public class COrganizeDebug : ThingComponent
         _orderedItems = player.InventoryGridManager.GetAllThings().Where(x => !IsInHotbar(x)).OrderBy(x => x.GetType().Name).ToList();
         _currIndex = 0;
     }
-    
+
     bool IsInHotbar(Thing thing)
     {
         return thing.GridPos.y == 0 && thing.ContainingGridManager.GetIndex(thing.GridPos) < 10;
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Sandbox.Time.Delta;
+        if (Thing is null || !Thing.HasBrain)
+            return;
 
         var player = Thing.Brain as RoguemojiPlayer;
-        if(player == null)
+        if (player == null)
         {
             Remove();
             return;
@@ -70,7 +69,7 @@ public class COrganizeDebug : ThingComponent
     {
         if (Thing.Brain is RoguemojiPlayer player)
             player.ClearQueuedAction();
-            
+
         if (Thing.GetComponent<CActing>(out var component))
             ((CActing)component).AllowAction();
 

@@ -20,11 +20,10 @@ public class VfxSlide : ThingComponent
         Thing.SetMoveOffset(dir * -Distance);
     }
 
-    public override void Update(float dt)
-    {
-        base.Update(dt);
+	protected override void OnUpdate()
+	{
 
-        var dir = GridManager.GetVectorForDirection(Direction);
+		var dir = GridManager.GetVectorForDirection(Direction);
         Thing.SetMoveOffset(dir * Utils.Map(TimeElapsed, 0f, Lifetime, -Distance, 0f, EasingType.QuadOut));
 
         if(TimeElapsed > Lifetime)

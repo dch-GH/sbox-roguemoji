@@ -24,11 +24,10 @@ public class CConfetti : ThingComponent
             IconId = ((CIconPriority)component2).AddIconPriority("🥳", (int)PlayerIconPriority.Confetti);
     }
 
-    public override void Update(float dt)
-    {
-        base.Update(dt);
-
-        var player = Thing.Brain as RoguemojiPlayer;
+	protected override void OnUpdate()
+	{
+		var dt = Time.Delta;
+		var player = Thing.Brain as RoguemojiPlayer;
         if(player == null)
         {
             Remove();

@@ -8,7 +8,7 @@ public partial class PotionPoison : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Poison);
 
-    public PotionPoison()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Poison;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionPoison : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Poisons the drinker";
         Tooltip = "A poison potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Poison));
 
         if (Game.IsServer)

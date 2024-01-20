@@ -4,9 +4,9 @@ using System;
 namespace Roguemoji;
 public partial class PuddleOil : Puddle
 {
-	public PuddleOil()
-	{
-		DisplayIcon = "⚫️";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "⚫️";
         DisplayName = "Puddle of Oil";
         Description = "Flammable and slippery";
         Tooltip = "A puddle of oil";
@@ -25,7 +25,7 @@ public partial class PuddleOil : Puddle
 
         _elapsedTime += dt;
 
-        if(_iconState == 0 && _elapsedTime > 0.3f)
+        if (_iconState == 0 && _elapsedTime > 0.3f)
         {
             _iconState++;
             DisplayIcon = "⬛️";
@@ -38,7 +38,7 @@ public partial class PuddleOil : Puddle
     {
         base.OnMovedOntoBy(thing);
 
-        if(!thing.LastGridPos.Equals(GridPos))
+        if (!thing.LastGridPos.Equals(GridPos))
         {
             var projectile = thing.AddComponent<CProjectile>();
             projectile.Direction = GridManager.GetDirectionForIntVector(GridPos - thing.LastGridPos);

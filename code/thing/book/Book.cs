@@ -9,7 +9,7 @@ public partial class Book : Thing
     public override string AbilityName => "Read Book";
     public string SpellName { get; protected set; }
 
-    public Book()
+    protected override void OnAwake()
     {
         DisplayIcon = "📘";
         IconDepth = (int)IconDepthLevel.Normal;

@@ -8,7 +8,7 @@ public partial class PotionConfusion : Potion
 {
     public override string SplashIcon => Globals.Icon(IconType.Confusion);
 
-    public PotionConfusion()
+    protected override void OnAwake()
     {
         PotionType = PotionType.Confusion;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable;
@@ -16,7 +16,7 @@ public partial class PotionConfusion : Potion
         DisplayName = Potion.GetDisplayName(PotionType);
         Description = "Makes drinker confused";
         Tooltip = "A confusion potion";
-        
+
         SetTattoo(Globals.Icon(IconType.Confusion));
 
         if (Game.IsServer)

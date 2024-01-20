@@ -23,9 +23,9 @@ public class VfxFly : ThingComponent
         SetOffset(progress: 0f);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         float progress = Utils.Map(TimeElapsed, 0f, Lifetime, 0f, 1f, ProgressEasingType);
         SetOffset(progress);

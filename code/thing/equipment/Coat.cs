@@ -6,9 +6,9 @@ public partial class Coat : Thing
 {
     public int MaxHealthAmount { get; private set; }
 
-    public Coat()
-	{
-		DisplayIcon = "🧥";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🧥";
         DisplayName = "Coat";
         Description = "Thick and warm";
         Tooltip = "A thick coat";

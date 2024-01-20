@@ -4,9 +4,9 @@ using System;
 namespace Roguemoji;
 public partial class Bouquet : Thing
 {
-	public Bouquet()
-	{
-		DisplayIcon = "💐";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "💐";
         DisplayName = "Bouquet";
         Description = "A lovely bunch of flowers";
         Tooltip = "A bouquet";

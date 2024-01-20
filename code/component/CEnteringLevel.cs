@@ -29,11 +29,11 @@ public class CEnteringLevel : ThingComponent
             IconId = ((CIconPriority)component).AddIconPriority("🙃", (int)PlayerIconPriority.EnterLevel);
     }
 
-    public override void Update(float dt)
-    {
-        base.Update(dt);
+	protected override void OnUpdate()
+	{
+		var dt = Time.Delta;
 
-        TimeElapsed += dt;
+		TimeElapsed += dt;
 
         if(TimeElapsed > Lifetime)
             Remove();

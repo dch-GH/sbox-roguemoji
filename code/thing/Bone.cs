@@ -4,13 +4,13 @@ using System;
 namespace Roguemoji;
 public partial class Bone : Thing
 {
-	public Bone()
-	{
-		DisplayIcon = "🦴";
-		DisplayName = "Bone";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🦴";
+        DisplayName = "Bone";
         IconDepth = (int)IconDepthLevel.Normal;
-		Tooltip = "A bone";
-		ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
+        Tooltip = "A bone";
+        ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp;
         Flammability = 8;
 
         if (Game.IsServer)

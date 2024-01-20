@@ -6,9 +6,9 @@ using System.Linq;
 namespace Roguemoji;
 public partial class Basketball : Thing
 {
-    public Basketball()
-	{
-		DisplayIcon = "🏀";
+    protected override void OnAwake()
+    {
+        DisplayIcon = "🏀";
         DisplayName = "Basketball";
         Description = "Bounces back unless it's caught";
         Tooltip = "A basketball";
@@ -23,7 +23,7 @@ public partial class Basketball : Thing
             AddTrait("", "🙌", $"When 🏀 hits, target catches if possible/Otherwise 🏀 disarms target and bounces back", offset: new Vector2(0f, -1f), tattooIcon: "🏀", tattooOffset: new Vector2(0f, -12f), tattooScale: 0.65f);
         }
     }
-    
+
     public override void OnBumpedOutOfBounds(Direction direction)
     {
         if (!HasComponent<CProjectile>())
@@ -51,7 +51,7 @@ public partial class Basketball : Thing
 
     public override void HitOther(Thing target, Direction direction)
     {
-        if(!HasComponent<CProjectile>())
+        if (!HasComponent<CProjectile>())
         {
             base.HitOther(target, direction);
             return;
@@ -71,11 +71,11 @@ public partial class Basketball : Thing
 
         if (target.HasFlag(ThingFlags.CanWieldThings))
         {
-            if(target.WieldedThing == null)
+            if (target.WieldedThing == null)
             {
-                if(target.Brain is RoguemojiPlayer player)
+                if (target.Brain is RoguemojiPlayer player)
                 {
-                    if(!player.TryPickUp(this, dontRequireAction: true))
+                    if (!player.TryPickUp(this, dontRequireAction: true))
                     {
                         RemoveComponent<CProjectile>();
                         AddProjectile(GridManager.GetOppositeDirection(direction), moveDelay, distance, thrower);

@@ -6,7 +6,7 @@ using System.Linq;
 namespace Roguemoji;
 public partial class ScrollTidalWave : Scroll
 {
-    public ScrollTidalWave()
+    protected override void OnAwake()
     {
         ScrollType = ScrollType.TidalWave;
         ThingFlags = ThingFlags.Selectable | ThingFlags.CanBePickedUp | ThingFlags.Useable | ThingFlags.UseRequiresAiming | ThingFlags.AimTypeTargetCell;
@@ -67,7 +67,7 @@ public partial class ScrollTidalWave : Scroll
         projectile.Thrower = user;
         projectile.UseDirectionVector(dir);
 
-        if(shouldPushStartPos)
+        if (shouldPushStartPos)
             wave.PushStartPosThings(gridDir);
     }
 

@@ -20,14 +20,14 @@ public class VfxPlayerSlideCamera : PlayerComponent
         Player.SetCameraPixelOffset(dir * Distance);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         var dir = GridManager.GetVectorForDirection(Direction);
         Player.SetCameraPixelOffset(dir * Utils.Map(TimeElapsed, 0f, Lifetime, Distance, 0f, EasingType.QuadOut));
 
-        if(TimeElapsed > Lifetime)
+        if (TimeElapsed > Lifetime)
             Remove();
     }
 

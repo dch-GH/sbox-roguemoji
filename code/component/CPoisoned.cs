@@ -31,9 +31,9 @@ public class CPoisoned : ThingComponent
             IconId = ((CIconPriority)component).AddIconPriority("🤒", (int)PlayerIconPriority.Poisoned);
     }
 
-    public override void Update(float dt)
+    protected override void OnUpdate()
     {
-        base.Update(dt);
+        var dt = Time.Delta;
 
         HurtTimer += dt;
         if (HurtTimer > HurtDelay)
@@ -49,7 +49,7 @@ public class CPoisoned : ThingComponent
         }
 
         TimeElapsed += dt;
-        if(Lifetime > 0f && TimeElapsed > Lifetime)
+        if (Lifetime > 0f && TimeElapsed > Lifetime)
         {
             Level--;
             Trait.Description = GetTraitDescription();

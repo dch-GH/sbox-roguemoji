@@ -40,11 +40,6 @@ public partial class Squirrel : Thing
         }
     }
 
-    public override void Spawn()
-    {
-        base.Spawn();
-    }
-
     public override void OnSpawned()
     {
         base.OnSpawned();

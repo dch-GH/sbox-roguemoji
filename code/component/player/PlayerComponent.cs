@@ -25,7 +25,7 @@ public abstract class PlayerComponent : Component
 
         if (IsClientComponent == Game.IsServer)
         {
-            Log.Error(GetType().Name + " IsClientComponent: " + IsClientComponent + " IsServer: " + Game.IsServer + "!");
+            //Log.Error(GetType().Name + " IsClientComponent: " + IsClientComponent + " IsServer: " + Game.IsServer + "!");
         }
     }
 

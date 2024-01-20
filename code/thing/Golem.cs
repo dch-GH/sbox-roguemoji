@@ -26,15 +26,10 @@ public partial class Golem : Thing
             InitStat(StatType.Hearing, 3);
             InitStat(StatType.SightBlockAmount, 20);
         }
-    }
 
-    public override void Spawn()
-    {
-        base.Spawn();
-
-        Targeting = AddComponent<CTargeting>();
-        Acting = AddComponent<CActing>();
-        Acting.ActionDelay = 1.5f;
-        Acting.ActionTimer = Game.Random.Float(0f, 1.5f);
-    }
+		Targeting = AddComponent<CTargeting>();
+		Acting = AddComponent<CActing>();
+		Acting.ActionDelay = 1.5f;
+		Acting.ActionTimer = Game.Random.Float( 0f, 1.5f );
+	}
 }

@@ -56,7 +56,7 @@ public partial class Thing : Entity
 
     public void HandleFloaters(float dt)
     {
-        if(!HasFloaters) 
+        if (!HasFloaters)
             return;
 
         for (int i = Floaters.Count - 1; i >= 0; i--)
@@ -67,14 +67,14 @@ public partial class Thing : Entity
         }
     }
 
-    public void AddFloater(string icon, float time, Vector2 offsetStart, Vector2 offsetEnd, float height = 0f, string text = "", bool requireSight = true, bool alwaysShowWhenAdjacent = false, EasingType offsetEasingType = EasingType.Linear, 
+    public void AddFloater(string icon, float time, Vector2 offsetStart, Vector2 offsetEnd, float height = 0f, string text = "", bool requireSight = true, bool alwaysShowWhenAdjacent = false, EasingType offsetEasingType = EasingType.Linear,
         float fadeInTime = 0f, float scale = 1f, float opacity = 1f, float shakeAmount = 0f, bool moveToGridOnDeath = false, bool showOnInvisible = false, bool showOnSeen = false)
     {
         AddFloaterClient(icon, time, offsetStart, offsetEnd, height, text, requireSight, alwaysShowWhenAdjacent, offsetEasingType, fadeInTime, scale, opacity, shakeAmount, moveToGridOnDeath, showOnInvisible, showOnSeen);
     }
 
-    [TargetedRPC]
-    public void AddFloaterClient(string icon, float time, Vector2 offsetStart, Vector2 offsetEnd, float height = 0f, string text = "", bool requireSight = true, bool alwaysShowWhenAdjacent = false, EasingType offsetEasingType = EasingType.Linear, 
+    // //[TargetedRPC]
+    public void AddFloaterClient(string icon, float time, Vector2 offsetStart, Vector2 offsetEnd, float height = 0f, string text = "", bool requireSight = true, bool alwaysShowWhenAdjacent = false, EasingType offsetEasingType = EasingType.Linear,
         float fadeInTime = 0f, float scale = 1f, float opacity = 1f, float shakeAmount = 0f, bool moveToGridOnDeath = false, bool showOnInvisible = false, bool showOnSeen = false)
     {
         if (Floaters == null)
@@ -88,7 +88,7 @@ public partial class Thing : Entity
         RemoveFloaterClient(icon);
     }
 
-    [TargetedRPC]
+    // //[TargetedRPC]
     public void RemoveFloaterClient(string icon)
     {
         if (!HasFloaters)
@@ -108,18 +108,18 @@ public partial class Thing : Entity
         //Log.Info($"{DisplayIcon} RemoveFloaterClient - Floaters.Count: {Floaters.Count}");
     }
 
-    [TargetedRPC]
+    // //[TargetedRPC]
     public void DestroyFloatersClient()
     {
         if (ContainingGridManager == null || Floaters == null)
             return;
 
-        foreach(var floater in Floaters)
+        foreach (var floater in Floaters)
         {
-            if(floater.moveToGridOnDeath)
+            if (floater.moveToGridOnDeath)
             {
                 ContainingGridManager.Floaters.Add(
-                    new GridFloaterData(floater.icon, GridPos, floater.time, floater.timeSinceStart, floater.offsetStart, floater.offsetEnd, floater.height, floater.text, 
+                    new GridFloaterData(floater.icon, GridPos, floater.time, floater.timeSinceStart, floater.offsetStart, floater.offsetEnd, floater.height, floater.text,
                     floater.requireSight, floater.alwaysShowWhenAdjacent, floater.offsetEasingType, floater.fadeInTime, floater.scale, floater.opacity, floater.shakeAmount)
                 );
             }

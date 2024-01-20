@@ -4,36 +4,23 @@ public partial class Ghost : Thing
 {
     public CActing Acting { get; private set; }
 
-	// todo: make inflammable
+    // todo: make inflammable
 
-	protected override void OnAwake()
-	{
-		ShouldUpdate = true;
-		DisplayName = "Ghost";
-		Tooltip = "";
-		PathfindMovementCost = 0f;
-		Flammability = 0;
-
-		if ( Game.IsServer )
-		{
-			SetStartingValues();
-		}
-	}
-
-	public override void Spawn()
+    protected override void OnAwake()
     {
-        base.Spawn();
+        ShouldUpdate = true;
+        DisplayName = "Ghost";
+        Tooltip = "";
+        PathfindMovementCost = 0f;
+        Flammability = 0;
+
+        if (Game.IsServer)
+        {
+            SetStartingValues();
+        }
 
         Acting = AddComponent<CActing>();
     }
-
-    //[Event.Tick.Client]
-    //public virtual void ClientTick()
-    //{
-    //    base.ClientTick();
-
-    //    DrawDebugText($"{GridPos}");
-    //}
 
     void SetStartingValues()
     {
